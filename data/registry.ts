@@ -23,6 +23,7 @@ import { GradientText } from '../components/lib/GradientText';
 import { GlassCard } from '../components/lib/GlassCard';
 import { Dock } from '../components/lib/Dock';
 import { StarBorder } from '../components/lib/StarBorder';
+import { PropertyShowcaseCard } from '../components/lib/PropertyShowcaseCard';
 import { Home, User, Settings, Mail } from 'lucide-react';
 import { ComponentDoc } from '../types';
 import GandomDashboardCode from '../components/lib/GandomDashboard.tsx?raw';
@@ -661,6 +662,91 @@ export function Example() {
       <Progress value={50} variant="success" />
       <Progress value={25} variant="warning" />
     </div>
+  );
+}`
+  },
+  {
+    slug: 'property-showcase-card',
+    name: 'Property Showcase Card',
+    description: 'A beautiful card component for showcasing properties, accommodations, or travel destinations with image, ratings, and booking functionality.',
+    category: 'UI Components',
+    component: PropertyShowcaseCard,
+    props: [
+      { name: 'title', type: 'string', description: 'Property title or name.' },
+      { name: 'description', type: 'string', description: 'Property description.' },
+      { name: 'image', type: 'string', description: 'Property image URL.' },
+      { name: 'rating', type: 'number', default: '4.5', description: 'Property rating (0-5).' },
+      { name: 'duration', type: 'string', default: '3 Night Stay', description: 'Stay duration or location info.' },
+      { name: 'isFavorite', type: 'boolean', default: 'false', description: 'Whether property is favorited.' },
+      { name: 'onFavoriteClick', type: '() => void', description: 'Callback when favorite button is clicked.' },
+      { name: 'onReserveClick', type: '() => void', description: 'Callback when reserve button is clicked.' },
+    ],
+    code: `// Installation: Copy the PropertyShowcaseCard component to your project
+// Dependencies: framer-motion, lucide-react, tailwind-merge
+
+import { PropertyShowcaseCard } from './components/lib/PropertyShowcaseCard';
+import { useState } from 'react';
+
+export function Example() {
+  const [favorites, setFavorites] = useState<string[]>([]);
+
+  const properties = [
+    {
+      id: '1',
+      title: 'Santorini Villa',
+      description: 'Luxury villa overlooking the Aegean Sea, offering breathtaking sunset views and infinity pool for ultimate relaxation.',
+      image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80',
+      rating: 4.9,
+      duration: '3 Night Stay',
+    },
+    {
+      id: '2',
+      title: 'Swiss Chalet',
+      description: 'Cozy wooden chalet nestled in the Swiss Alps, offering a warm fireplace, scenic mountain views, and direct access to ski slopes.',
+      image: 'https://images.unsplash.com/photo-1542718610-a1d656d1884c?w=800&q=80',
+      rating: 4.7,
+      duration: '4 Night Stay',
+    },
+  ];
+
+  const toggleFavorite = (id: string) => {
+    setFavorites(prev => 
+      prev.includes(id) 
+        ? prev.filter(fav => fav !== id)
+        : [...prev, id]
+    );
+  };
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
+      {properties.map((property) => (
+        <PropertyShowcaseCard
+          key={property.id}
+          title={property.title}
+          description={property.description}
+          image={property.image}
+          rating={property.rating}
+          duration={property.duration}
+          isFavorite={favorites.includes(property.id)}
+          onFavoriteClick={() => toggleFavorite(property.id)}
+          onReserveClick={() => alert(\`Reserving \${property.title}\`)}
+        />
+      ))}
+    </div>
+  );
+}
+
+// Single card example
+export function SingleCardExample() {
+  return (
+    <PropertyShowcaseCard
+      title="Mountain Retreat"
+      description="Escape to this peaceful mountain retreat with stunning views and modern amenities."
+      image="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
+      rating={4.8}
+      duration="Weekend Getaway"
+      onReserveClick={() => console.log('Reserve clicked')}
+    />
   );
 }`
   }

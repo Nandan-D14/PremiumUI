@@ -68,6 +68,13 @@ export const ComponentDetail: React.FC = () => {
       initialProps.value = 75;
       initialProps.variant = 'default';
       initialProps.showLabel = true;
+    } else if (componentData.slug === 'property-showcase-card') {
+      initialProps.title = 'Santorini Villa';
+      initialProps.description = 'Luxury villa overlooking the Aegean Sea, offering breathtaking sunset views and infinity pool for ultimate relaxation.';
+      initialProps.image = 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80';
+      initialProps.rating = 4.9;
+      initialProps.duration = '3 Night Stay';
+      initialProps.isFavorite = false;
     } else if (componentData.slug === 'accordion') {
       initialProps.allowMultiple = false;
     } else if (componentData.slug === 'tooltip') {
@@ -303,6 +310,20 @@ export const ComponentDetail: React.FC = () => {
                        <p className="text-sm text-secondary text-center">Adjust value and variant in controls</p>
                      </div>
                    )}
+                   {componentData.slug === 'property-showcase-card' && (
+                     <div className="w-full max-w-sm mx-auto">
+                       <Component 
+                         title={demoProps.title || 'Santorini Villa'}
+                         description={demoProps.description || 'Luxury villa overlooking the Aegean Sea, offering breathtaking sunset views and infinity pool for ultimate relaxation.'}
+                         image={demoProps.image || 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80'}
+                         rating={Number(demoProps.rating) || 4.9}
+                         duration={demoProps.duration || '3 Night Stay'}
+                         isFavorite={demoProps.isFavorite || false}
+                         onFavoriteClick={() => alert('Favorite toggled!')}
+                         onReserveClick={() => alert('Reserve clicked!')}
+                       />
+                     </div>
+                   )}
                    {componentData.slug === 'animated-gradient' && (
                      <div className="w-full">
                        <Component className="p-8 rounded-xl">
@@ -424,7 +445,7 @@ export const ComponentDetail: React.FC = () => {
                         </Component>
                      </div>
                    )}
-                   {!['split-text', 'spotlight-card', 'tilted-card', 'button', 'input', 'badge', 'card', 'glowing-card', 'shimmer-button', 'parallax-card', 'typewriter-text', 'progress', 'animated-gradient', 'tabs', 'accordion', 'modal', 'tooltip', 'modern-saas', 'gandom-dashboard', 'saaspo-landing', 'decrypted-text', 'gradient-text', 'glass-card', 'dock', 'star-border'].includes(componentData.slug) && (
+                   {!['split-text', 'spotlight-card', 'tilted-card', 'button', 'input', 'badge', 'card', 'glowing-card', 'shimmer-button', 'parallax-card', 'typewriter-text', 'progress', 'property-showcase-card', 'animated-gradient', 'tabs', 'accordion', 'modal', 'tooltip', 'modern-saas', 'gandom-dashboard', 'saaspo-landing', 'decrypted-text', 'gradient-text', 'glass-card', 'dock', 'star-border'].includes(componentData.slug) && (
                      <div className="text-center text-secondary">
                        <p className="mb-4">Preview not available for this component.</p>
                        <p className="text-sm">Check the code tab for usage examples.</p>
