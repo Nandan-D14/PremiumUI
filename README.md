@@ -11,9 +11,6 @@ A premium collection of animated React components built with Tailwind CSS and Fr
 *   **Dark Mode First**: Designed for modern, dark-themed interfaces.
 *   **Copy & Paste**: No npm install required. Just copy the code you need.
 
-## Getting Started
-
-Visit the [documentation](http://localhost:5173/#/docs/introduction) to get started.
 
 ## Installation
 
