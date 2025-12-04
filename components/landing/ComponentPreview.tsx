@@ -25,15 +25,15 @@ export const ComponentPreview = () => {
         </div>
 
         <div className="flex justify-center mb-8">
-          <div className="bg-surface border border-border rounded-full p-1 flex gap-1">
+          <div className="bg-muted rounded-lg p-1 flex gap-1">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
                   activeTab === tab.id
-                    ? 'bg-primary text-white shadow-lg'
-                    : 'text-secondary hover:text-white'
+                    ? 'bg-background text-foreground shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 {tab.label}
@@ -42,10 +42,10 @@ export const ComponentPreview = () => {
           </div>
         </div>
 
-        <div className="bg-surface/50 border border-border rounded-2xl p-12 min-h-[400px] flex items-center justify-center backdrop-blur-sm relative">
+        <div className="bg-card border border-border rounded-xl p-12 min-h-[400px] flex items-center justify-center relative overflow-hidden shadow-sm">
            {/* Background Grid */}
            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
-
+           
            <AnimatePresence mode="wait">
              {activeTab === 'buttons' && (
                <motion.div 

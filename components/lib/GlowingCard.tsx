@@ -11,7 +11,7 @@ export interface GlowingCardProps {
 export const GlowingCard: React.FC<GlowingCardProps> = ({
   children,
   className,
-  glowColor = '#FF0B55'
+  glowColor = '#6366f1'
 }) => {  return (
     <motion.div
       whileHover={{ scale: 1.02 }}
@@ -19,12 +19,12 @@ export const GlowingCard: React.FC<GlowingCardProps> = ({
     >
       {/* Glow effect */}
       <div 
-        className="absolute -inset-0.5 rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500"
+        className="absolute -inset-0.5 rounded-xl opacity-40 group-hover:opacity-100 blur-xl transition-opacity duration-500"
         style={{ background: `linear-gradient(135deg, ${glowColor}, transparent)` }}
       />
       
       {/* Card content */}
-      <div className="relative rounded-xl border border-border bg-surface p-6">
+      <div className="relative rounded-xl bg-surface/40 backdrop-blur-xl p-6 h-full shadow-2xl">
         {children}
       </div>
     </motion.div>

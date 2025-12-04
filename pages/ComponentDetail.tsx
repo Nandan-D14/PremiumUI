@@ -127,18 +127,18 @@ export const ComponentDetail: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto pb-20">
       <div className="mb-10">
-        <h1 className="text-4xl font-bold text-white mb-4">{componentData.name}</h1>
-        <p className="text-xl text-secondary">{componentData.description}</p>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground mb-2">{componentData.name}</h1>
+        <p className="text-lg text-muted-foreground">{componentData.description}</p>
       </div>
 
-      <div className="mb-8 flex items-center gap-4 border-b border-border">
+      <div className="mb-6 flex items-center gap-1 border-b border-border">
         <button
           onClick={() => setActiveTab('preview')}
           className={cn(
-            "flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors border-b-2",
+            "flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-all border-b-2 relative -bottom-px",
             activeTab === 'preview' 
-              ? "border-primary text-white" 
-              : "border-transparent text-secondary hover:text-white"
+              ? "border-primary text-foreground" 
+              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
           )}
         >
           <Eye size={16} /> Preview
@@ -146,10 +146,10 @@ export const ComponentDetail: React.FC = () => {
         <button
           onClick={() => setActiveTab('code')}
           className={cn(
-            "flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors border-b-2",
+            "flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-all border-b-2 relative -bottom-px",
             activeTab === 'code' 
-              ? "border-primary text-white" 
-              : "border-transparent text-secondary hover:text-white"
+              ? "border-primary text-foreground" 
+              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
           )}
         >
           <Code size={16} /> Code
@@ -159,15 +159,15 @@ export const ComponentDetail: React.FC = () => {
             href={`/#/templates/${componentData.slug}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-auto flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors text-secondary hover:text-white"
+            className="ml-auto flex items-center gap-2 px-3 py-1.5 text-xs font-medium transition-colors text-muted-foreground hover:text-foreground bg-muted hover:bg-muted/80 rounded-md"
           >
-            View Full Template <ArrowRight size={16} />
+            View Full Template <ArrowRight size={14} />
           </a>
         )}
       </div>
 
       <div className={cn(
-        "relative rounded-xl border border-border bg-surface overflow-hidden",
+        "relative rounded-xl border border-border bg-card shadow-sm overflow-hidden",
         componentData.category === 'Templates' ? 'min-h-[800px]' : 'min-h-[500px]'
       )}>
         {activeTab === 'preview' ? (
@@ -204,7 +204,7 @@ export const ComponentDetail: React.FC = () => {
                           <div className="h-6 w-6 bg-primary rounded-full" />
                         </div>
                         <h2 className="text-2xl font-bold text-white">Hover Me</h2>
-                        <p className="text-secondary mt-2">I have a spotlight effect!</p>
+                        <p className="text-white/70 mt-2">I have a spotlight effect!</p>
                      </Component>
                    )}
                    {componentData.slug === 'tilted-card' && (
@@ -230,7 +230,7 @@ export const ComponentDetail: React.FC = () => {
                        >
                          Click Me
                        </Component>
-                       <p className="text-sm text-secondary">Try changing the variant and size in the controls</p>
+                       <p className="text-sm text-white/70">Try changing the variant and size in the controls</p>
                      </div>
                    )}
                    {componentData.slug === 'input' && (
@@ -240,7 +240,7 @@ export const ComponentDetail: React.FC = () => {
                          placeholder="Enter your email"
                          error={demoProps.error}
                        />
-                       <p className="text-sm text-secondary">Try adding an error message in the controls</p>
+                       <p className="text-sm text-white/70">Try adding an error message in the controls</p>
                      </div>
                    )}
                    {componentData.slug === 'badge' && (
@@ -248,7 +248,7 @@ export const ComponentDetail: React.FC = () => {
                        <div className="flex flex-wrap gap-3 justify-center">
                          <Component variant={demoProps.variant || 'default'}>Badge</Component>
                        </div>
-                       <p className="text-sm text-secondary">Try different variants in the controls</p>
+                       <p className="text-sm text-white/70">Try different variants in the controls</p>
                      </div>
                    )}
                    {componentData.slug === 'card' && (
@@ -256,10 +256,10 @@ export const ComponentDetail: React.FC = () => {
                        <Component hover={demoProps.hover}>
                          <div className="p-6">
                            <h3 className="text-xl font-bold text-white mb-2">Card Title</h3>
-                           <p className="text-secondary">This is a card component with customizable content.</p>
+                           <p className="text-white/70">This is a card component with customizable content.</p>
                          </div>
                        </Component>
-                       <p className="text-sm text-secondary text-center">Toggle hover effect in controls</p>
+                       <p className="text-sm text-white/70 text-center">Toggle hover effect in controls</p>
                      </div>
                    )}
                    {componentData.slug === 'glowing-card' && (
@@ -269,7 +269,7 @@ export const ComponentDetail: React.FC = () => {
                            <span className="text-2xl">✨</span>
                          </div>
                          <h3 className="text-xl font-bold text-white">Glowing Card</h3>
-                         <p className="text-secondary mt-2">Hover to see the glow effect</p>
+                         <p className="text-white/70 mt-2">Hover to see the glow effect</p>
                        </Component>
                      </div>
                    )}
@@ -278,14 +278,14 @@ export const ComponentDetail: React.FC = () => {
                        <Component shimmerColor={demoProps.shimmerColor}>
                          Shimmer Button
                        </Component>
-                       <p className="text-sm text-secondary">Watch the shimmer animation</p>
+                       <p className="text-sm text-white/70">Watch the shimmer animation</p>
                      </div>
                    )}
                    {componentData.slug === 'parallax-card' && (
                      <div className="w-full">
                        <Component intensity={Number(demoProps.intensity) || 20}>
                          <h3 className="text-xl font-bold text-white mb-2">Parallax Card</h3>
-                         <p className="text-secondary">Move your mouse to see the 3D effect</p>
+                         <p className="text-white/70">Move your mouse to see the 3D effect</p>
                        </Component>
                      </div>
                    )}
@@ -297,7 +297,7 @@ export const ComponentDetail: React.FC = () => {
                          cursor={demoProps.cursor !== false}
                          className="text-2xl font-bold text-white text-center"
                        />
-                       <p className="text-sm text-secondary">Adjust speed in controls</p>
+                       <p className="text-sm text-white/70">Adjust speed in controls</p>
                      </div>
                    )}
                    {componentData.slug === 'progress' && (
@@ -307,7 +307,7 @@ export const ComponentDetail: React.FC = () => {
                          variant={demoProps.variant || 'default'}
                          showLabel={demoProps.showLabel !== false}
                        />
-                       <p className="text-sm text-secondary text-center">Adjust value and variant in controls</p>
+                       <p className="text-sm text-white/70 text-center">Adjust value and variant in controls</p>
                      </div>
                    )}
                    {componentData.slug === 'property-showcase-card' && (
@@ -354,13 +354,13 @@ export const ComponentDetail: React.FC = () => {
                          ]}
                          allowMultiple={demoProps.allowMultiple}
                        />
-                       <p className="text-sm text-secondary text-center">Click sections to expand/collapse</p>
+                       <p className="text-sm text-white/70 text-center">Click sections to expand/collapse</p>
                      </div>
                    )}
                    {componentData.slug === 'modal' && (
                      <div className="text-center">
-                       <p className="text-secondary mb-4">Modal component requires state management.</p>
-                       <p className="text-sm text-secondary">Check the code tab for usage examples.</p>
+                       <p className="text-white/70 mb-4">Modal component requires state management.</p>
+                       <p className="text-sm text-white/70">Check the code tab for usage examples.</p>
                      </div>
                    )}
                    {componentData.slug === 'tooltip' && (
@@ -370,7 +370,7 @@ export const ComponentDetail: React.FC = () => {
                            Hover me
                          </button>
                        </Component>
-                       <p className="text-sm text-secondary">Hover over the button to see the tooltip</p>
+                       <p className="text-sm text-white/70">Hover over the button to see the tooltip</p>
                      </div>
                    )}
                    {componentData.slug === 'gandom-dashboard' && (
@@ -396,7 +396,7 @@ export const ComponentDetail: React.FC = () => {
                           animateOn={demoProps.animateOn || 'hover'}
                           className="text-4xl font-bold text-green-500"
                         />
-                        <p className="text-sm text-secondary">Hover or refresh to see animation</p>
+                        <p className="text-sm text-white/70">Hover or refresh to see animation</p>
                      </div>
                    )}
                    {componentData.slug === 'gradient-text' && (
@@ -446,7 +446,7 @@ export const ComponentDetail: React.FC = () => {
                      </div>
                    )}
                    {!['split-text', 'spotlight-card', 'tilted-card', 'button', 'input', 'badge', 'card', 'glowing-card', 'shimmer-button', 'parallax-card', 'typewriter-text', 'progress', 'property-showcase-card', 'animated-gradient', 'tabs', 'accordion', 'modal', 'tooltip', 'modern-saas', 'gandom-dashboard', 'saaspo-landing', 'decrypted-text', 'gradient-text', 'glass-card', 'dock', 'star-border'].includes(componentData.slug) && (
-                     <div className="text-center text-secondary">
+                     <div className="text-center text-muted-foreground">
                        <p className="mb-4">Preview not available for this component.</p>
                        <p className="text-sm">Check the code tab for usage examples.</p>
                      </div>
@@ -456,15 +456,15 @@ export const ComponentDetail: React.FC = () => {
 
              {/* Controls Panel - Hidden for Templates */}
              {componentData.category !== 'Templates' && (
-             <div className="w-full lg:w-80 border-t lg:border-t-0 lg:border-l border-border bg-surface/50 backdrop-blur-sm p-6">
+             <div className="w-full lg:w-80 border-t lg:border-t-0 lg:border-l border-border bg-card p-6">
                 <div className="flex items-center justify-between mb-6">
-                   <h3 className="font-semibold text-white flex items-center gap-2">
+                   <h3 className="font-semibold text-foreground flex items-center gap-2">
                       <Settings2 size={16} />
                       <span>Controls</span>
                    </h3>
                    <button 
                       onClick={handleReset}
-                      className="p-1.5 rounded-md hover:bg-white/10 text-secondary hover:text-white transition-colors"
+                      className="p-1.5 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
                       title="Reset to defaults"
                    >
                       <RotateCcw size={14} />
@@ -480,8 +480,8 @@ export const ComponentDetail: React.FC = () => {
                       return (
                         <div key={prop.name} className="space-y-2">
                            <div className="flex justify-between items-center">
-                              <label className="text-xs font-medium text-secondary uppercase tracking-wider">{prop.name}</label>
-                              <span className="text-[10px] font-mono text-secondary/70">{prop.type}</span>
+                              <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{prop.name}</label>
+                              <span className="text-[10px] font-mono text-muted-foreground/70">{prop.type}</span>
                            </div>
                            
                            {prop.type === 'number' ? (
@@ -490,11 +490,11 @@ export const ComponentDetail: React.FC = () => {
                                 value={currentValue}
                                 step={prop.name.includes('delay') || prop.name.includes('scale') ? "0.01" : "1"}
                                 onChange={(e) => handlePropChange(prop.name, parseFloat(e.target.value))}
-                                className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all"
+                                className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm text-foreground focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all"
                               />
                            ) : prop.name.toLowerCase().includes('color') ? (
                               <div className="flex gap-2">
-                                 <div className="h-9 w-9 rounded-lg border border-border overflow-hidden shrink-0 relative">
+                                 <div className="h-9 w-9 rounded-md border border-border overflow-hidden shrink-0 relative">
                                     <input 
                                        type="color" 
                                        value={currentValue.startsWith('#') ? currentValue : '#ffffff'}
@@ -506,7 +506,7 @@ export const ComponentDetail: React.FC = () => {
                                     type="text" 
                                     value={currentValue}
                                     onChange={(e) => handlePropChange(prop.name, e.target.value)}
-                                    className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all font-mono"
+                                    className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm text-foreground focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all font-mono"
                                  />
                               </div>
                            ) : (
@@ -514,7 +514,7 @@ export const ComponentDetail: React.FC = () => {
                                 type="text" 
                                 value={currentValue}
                                 onChange={(e) => handlePropChange(prop.name, e.target.value)}
-                                className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all"
+                                className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm text-foreground focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all"
                               />
                            )}
                         </div>
@@ -522,7 +522,7 @@ export const ComponentDetail: React.FC = () => {
                    })}
                    
                    {Object.keys(demoProps).length === 0 && (
-                      <p className="text-sm text-secondary text-center py-4">
+                      <p className="text-sm text-muted-foreground text-center py-4">
                          No editable properties available.
                       </p>
                    )}
@@ -597,24 +597,24 @@ export const ComponentDetail: React.FC = () => {
       )}
 
       <div className="mt-12">
-        <h3 className="text-2xl font-bold text-white mb-6">Props</h3>
-        <div className="overflow-x-auto rounded-xl border border-border bg-surface/50">
+        <h3 className="text-2xl font-semibold tracking-tight text-foreground mb-6">Props</h3>
+        <div className="overflow-x-auto rounded-lg border border-border bg-card">
           <table className="w-full text-left text-sm">
-            <thead className="bg-surface border-b border-border">
+            <thead className="bg-muted/50 border-b border-border">
               <tr>
-                <th className="px-6 py-4 font-semibold text-white">Prop</th>
-                <th className="px-6 py-4 font-semibold text-white">Type</th>
-                <th className="px-6 py-4 font-semibold text-white">Default</th>
-                <th className="px-6 py-4 font-semibold text-white">Description</th>
+                <th className="px-6 py-4 font-medium text-foreground">Prop</th>
+                <th className="px-6 py-4 font-medium text-foreground">Type</th>
+                <th className="px-6 py-4 font-medium text-foreground">Default</th>
+                <th className="px-6 py-4 font-medium text-foreground">Description</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
               {componentData.props.map((prop) => (
-                <tr key={prop.name} className="hover:bg-white/5 transition-colors">
-                  <td className="px-6 py-4 font-mono text-primary font-medium">{prop.name}</td>
-                  <td className="px-6 py-4 font-mono text-purple-300 text-xs">{prop.type}</td>
-                  <td className="px-6 py-4 font-mono text-secondary text-xs">{prop.default || '-'}</td>
-                  <td className="px-6 py-4 text-secondary leading-relaxed">{prop.description}</td>
+                <tr key={prop.name} className="hover:bg-muted/50 transition-colors">
+                  <td className="px-6 py-4 font-mono text-sm text-foreground">{prop.name}</td>
+                  <td className="px-6 py-4 font-mono text-xs text-muted-foreground bg-muted/30 rounded px-2 py-1 w-fit">{prop.type}</td>
+                  <td className="px-6 py-4 font-mono text-xs text-muted-foreground">{prop.default || '-'}</td>
+                  <td className="px-6 py-4 text-muted-foreground leading-relaxed">{prop.description}</td>
                 </tr>
               ))}
             </tbody>

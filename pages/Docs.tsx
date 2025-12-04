@@ -24,22 +24,22 @@ export const Docs: React.FC = () => {
             <h3 className="text-2xl font-semibold text-white mt-10 mb-4 flex items-center gap-2">
               <Terminal size={24} /> 1. Install Dependencies
             </h3>
-            <div className="rounded-lg bg-surface border border-border p-4 mb-8">
-              <code className="text-sm font-mono text-primary">
+            <div className="rounded-lg bg-muted/50 border border-border p-4 mb-8">
+              <code className="text-sm font-mono text-foreground">
                 npm install framer-motion clsx tailwind-merge lucide-react
               </code>
             </div>
 
-            <h3 className="text-2xl font-semibold text-white mt-10 mb-4 flex items-center gap-2">
+            <h3 className="text-2xl font-semibold text-foreground mt-10 mb-4 flex items-center gap-2">
               <Code size={24} /> 2. Configure Tailwind
             </h3>
-            <p className="text-secondary mb-4">
+            <p className="text-muted-foreground mb-4">
               Ensure your project is set up with Tailwind CSS. We use a utility helper to merge classes.
             </p>
-            <p className="text-secondary">
-              Create a file named <code className="text-primary bg-white/10 px-1 rounded">utils/cn.ts</code>:
+            <p className="text-muted-foreground">
+              Create a file named <code className="text-foreground bg-muted px-1 rounded border border-border">utils/cn.ts</code>:
             </p>
-            <div className="rounded-lg bg-surface border border-border p-4 mt-4">
+            <div className="rounded-lg bg-muted/50 border border-border p-4 mt-4">
 <pre className="text-sm font-mono text-gray-300">
 {`import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
