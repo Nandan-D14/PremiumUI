@@ -180,7 +180,7 @@ export const ComponentDetail: React.FC = () => {
                "relative overflow-hidden flex items-center justify-center",
                componentData.category === 'Templates' 
                  ? 'flex-1 bg-background p-0' 
-                 : 'flex-1 bg-[radial-gradient(#1f1f1f_1px,transparent_1px)] [background-size:16px_16px] p-8 sm:p-12'
+                 : 'flex-1 bg-[radial-gradient(#18181b_1px,transparent_1px)] [background-size:16px_16px] p-8 sm:p-12'
              )}>
                  <div className={cn(
                    "z-10",
@@ -388,6 +388,52 @@ export const ComponentDetail: React.FC = () => {
                         <Component />
                      </div>
                    )}
+                   {componentData.slug === 'artoo-3d' && (
+                     <div className="w-full h-[800px] overflow-y-auto rounded-xl border border-border bg-[#2C343B] relative">
+                        <Component />
+                     </div>
+                   )}
+                   {componentData.slug === 'nebula-portfolio' && (
+                     <div className="w-full h-[800px] overflow-y-auto rounded-xl border border-border bg-[#050505] relative">
+                        <Component />
+                     </div>
+                   )}
+                   {componentData.slug === 'nebula-swirl' && (
+                     <div className="w-full h-[500px] bg-[#050505] rounded-xl relative overflow-hidden flex items-center justify-center">
+                        <Component />
+                        <div className="z-10 text-white font-bold text-2xl relative pointer-events-none">Nebula Swirl Background</div>
+                     </div>
+                   )}
+                   {componentData.slug === 'chain-fund' && (
+                     <div className="w-full h-[800px] overflow-y-auto rounded-xl border border-border bg-[#020410] relative">
+                        <Component />
+                     </div>
+                   )}
+                   {componentData.slug === 'nixt-node' && (
+                     <div className="w-full h-[800px] overflow-y-auto rounded-xl border border-border bg-[#050505] relative">
+                        <Component />
+                     </div>
+                   )}
+                   {componentData.slug === 'payon-hero' && (
+                     <div className="w-full h-[800px] overflow-y-auto rounded-xl border border-border bg-[#020510] relative">
+                        <Component />
+                     </div>
+                   )}
+                   {componentData.slug === 'unlimi-hero' && (
+                     <div className="w-full h-[800px] overflow-y-auto rounded-xl border border-border bg-[#F2F3F7] relative text-black">
+                        <Component />
+                     </div>
+                   )}
+                   {componentData.slug === 'nebula-hero' && (
+                     <div className="w-full h-[800px] overflow-y-auto rounded-xl border border-border bg-black relative">
+                        <Component />
+                     </div>
+                   )}
+                   {componentData.slug === 'roobert-hero' && (
+                     <div className="w-full h-[800px] overflow-y-auto rounded-xl border border-border bg-[#EBEBED] relative text-black">
+                        <Component />
+                     </div>
+                   )}
                    {componentData.slug === 'decrypted-text' && (
                      <div className="flex flex-col items-center gap-4">
                         <Component 
@@ -445,7 +491,7 @@ export const ComponentDetail: React.FC = () => {
                         </Component>
                      </div>
                    )}
-                   {!['split-text', 'spotlight-card', 'tilted-card', 'button', 'input', 'badge', 'card', 'glowing-card', 'shimmer-button', 'parallax-card', 'typewriter-text', 'progress', 'property-showcase-card', 'animated-gradient', 'tabs', 'accordion', 'modal', 'tooltip', 'modern-saas', 'gandom-dashboard', 'saaspo-landing', 'decrypted-text', 'gradient-text', 'glass-card', 'dock', 'star-border'].includes(componentData.slug) && (
+                   {!['split-text', 'spotlight-card', 'tilted-card', 'button', 'input', 'badge', 'card', 'glowing-card', 'shimmer-button', 'parallax-card', 'typewriter-text', 'progress', 'property-showcase-card', 'animated-gradient', 'tabs', 'accordion', 'modal', 'tooltip', 'modern-saas', 'gandom-dashboard', 'saaspo-landing', 'decrypted-text', 'gradient-text', 'glass-card', 'dock', 'star-border', 'artoo-3d', 'nebula-portfolio', 'nebula-swirl', 'chain-fund', 'nixt-node', 'payon-hero', 'unlimi-hero', 'nebula-hero', 'roobert-hero'].includes(componentData.slug) && (
                      <div className="text-center text-muted-foreground">
                        <p className="mb-4">Preview not available for this component.</p>
                        <p className="text-sm">Check the code tab for usage examples.</p>

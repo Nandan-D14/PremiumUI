@@ -24,12 +24,113 @@ import { GlassCard } from '../components/lib/GlassCard';
 import { Dock } from '../components/lib/Dock';
 import { StarBorder } from '../components/lib/StarBorder';
 import { PropertyShowcaseCard } from '../components/lib/PropertyShowcaseCard';
+import { Artoo3D } from '../components/lib/Artoo3D';
+import { NebulaPortfolio } from '../components/lib/NebulaPortfolio';
+import { NebulaSwirl } from '../components/lib/NebulaSwirl';
+import { ChainFundHero } from '../components/lib/ChainFundHero';
+import { NixtNodeHero } from '../components/lib/NixtNodeHero';
+import { PayonHero } from '../components/lib/PayonHero';
+import { UnlimiHero } from '../components/lib/UnlimiHero';
+import { NebulaHero } from '../components/lib/NebulaHero';
+import { RoobertHero } from '../components/lib/RoobertHero';
 import { Home, User, Settings, Mail } from 'lucide-react';
 import { ComponentDoc } from '../types';
 import GandomDashboardCode from '../components/lib/GandomDashboard.tsx?raw';
 import SaaspoLandingCode from '../components/lib/SaaspoLanding.tsx?raw';
+import Artoo3DCode from '../components/lib/Artoo3D.tsx?raw';
+import NebulaPortfolioCode from '../components/lib/NebulaPortfolio.tsx?raw';
+import NebulaSwirlCode from '../components/lib/NebulaSwirl.tsx?raw';
+import ChainFundHeroCode from '../components/lib/ChainFundHero.tsx?raw';
+import NixtNodeHeroCode from '../components/lib/NixtNodeHero.tsx?raw';
+import PayonHeroCode from '../components/lib/PayonHero.tsx?raw';
+import UnlimiHeroCode from '../components/lib/UnlimiHero.tsx?raw';
+import NebulaHeroCode from '../components/lib/NebulaHero.tsx?raw';
+import RoobertHeroCode from '../components/lib/RoobertHero.tsx?raw';
 
 export const COMPONENT_REGISTRY: ComponentDoc[] = [
+  {
+    slug: 'roobert-hero',
+    name: 'Roobert Design Hero',
+    description: 'A minimalist, browser-window style hero section with a clean prompt interface and grid layout.',
+    category: 'Templates',
+    component: RoobertHero,
+    props: [],
+    code: RoobertHeroCode
+  },
+  {
+    slug: 'nebula-hero',
+    name: 'Nebula Protocol Landing',
+    description: 'A high-performance blockchain protocol landing page with bento grids, code snippets, and dark mode aesthetics.',
+    category: 'Templates',
+    component: NebulaHero,
+    props: [],
+    code: NebulaHeroCode
+  },
+  {
+    slug: 'unlimi-hero',
+    name: 'Unlimi Streaming Dashboard',
+    description: 'A Netflix-style streaming dashboard with a sidebar, hero banner, and horizontal scrolling lists.',
+    category: 'Templates',
+    component: UnlimiHero,
+    props: [],
+    code: UnlimiHeroCode
+  },
+  {
+    slug: 'payon-hero',
+    name: 'Payon Fintech Hero',
+    description: 'A modern fintech landing page with a cosmic planet background effect and 3D card interactions.',
+    category: 'Templates',
+    component: PayonHero,
+    props: [],
+    code: PayonHeroCode
+  },
+  {
+    slug: 'nixt-node',
+    name: 'NixtNode Web3 Hero',
+    description: 'A premium Web3 infrastructure landing page with curved SVG backgrounds, stat cards, and smooth animations.',
+    category: 'Templates',
+    component: NixtNodeHero,
+    props: [],
+    code: NixtNodeHeroCode
+  },
+  {
+    slug: 'chain-fund',
+    name: 'ChainFund Crypto Hero',
+    description: 'A high-tech crypto landing page hero section with 3D floating elements, glowing beams, and glassmorphism.',
+    category: 'Templates',
+    component: ChainFundHero,
+    props: [],
+    code: ChainFundHeroCode
+  },
+  {
+    slug: 'nebula-portfolio',
+    name: 'Nebula Portfolio',
+    description: 'A dark, cinematic portfolio landing page with a custom swirling nebula particle animation.',
+    category: 'Templates',
+    component: NebulaPortfolio,
+    props: [],
+    code: NebulaPortfolioCode
+  },
+  {
+    slug: 'nebula-swirl',
+    name: 'Nebula Swirl',
+    description: 'A canvas-based particle animation creating a glowing, smooth swirl effect.',
+    category: 'Backgrounds',
+    component: NebulaSwirl,
+    props: [
+      { name: 'className', type: 'string', description: 'Additional CSS classes.' },
+    ],
+    code: NebulaSwirlCode
+  },
+  {
+    slug: 'artoo-3d',
+    name: 'Artoo 3D',
+    description: 'A futuristic 3D art showcase landing page with a unique sidebar, interactive hero, and events footer.',
+    category: 'Templates',
+    component: Artoo3D,
+    props: [],
+    code: Artoo3DCode
+  },
   {
     slug: 'saaspo-landing',
     name: 'Saaspo Landing',
