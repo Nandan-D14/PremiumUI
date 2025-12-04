@@ -84,8 +84,8 @@ const Navbar = () => {
   return (
     <nav className="flex items-center justify-between py-6 px-4 md:px-8 max-w-7xl mx-auto w-full relative z-50">
       <div className="flex items-center gap-2">
-        <div className="w-8 h-8 border-2 border-white rounded flex items-center justify-center">
-          <div className="w-4 h-4 border border-white rounded-sm"></div>
+        <div className="w-8 h-8 border-2 border-white rounded-[4px] flex items-center justify-center">
+          <div className="w-4 h-4 border border-white rounded-[2px]"></div>
         </div>
         <span className="text-xl font-bold tracking-tight text-white">saaspo</span>
       </div>
@@ -100,14 +100,14 @@ const Navbar = () => {
         </a>
         <a href="#" className="text-gray-400 hover:text-white flex items-center gap-1 transition-colors relative">
           Templates 
-          <span className="absolute -top-3 -right-6 text-[10px] font-bold bg-[#1C3A29] text-[#4ADE80] px-1.5 py-0.5 rounded border border-[#4ADE80]/20">NEW</span>
+          <span className="absolute -top-3 -right-6 text-[10px] font-bold bg-[#1C3A29] text-[#4ADE80] px-1.5 py-0.5 rounded-[4px] border border-[#4ADE80]/20">NEW</span>
         </a>
       </div>
 
       {/* Desktop Actions */}
       <div className="hidden md:flex items-center gap-6">
         <a href="#" className="text-gray-400 hover:text-white font-medium transition-colors">Find an expert</a>
-        <button className="bg-[#4ADE80] text-black font-bold px-5 py-2.5 rounded-lg hover:bg-[#3ec470] transition-colors shadow-[0_0_15px_rgba(74,222,128,0.3)]">
+        <button className="bg-[#4ADE80] text-black font-bold px-5 py-2.5 rounded-[8px] hover:bg-[#3ec470] transition-colors shadow-[0_0_15px_rgba(74,222,128,0.3)]">
           Subscribe
         </button>
       </div>
@@ -129,7 +129,7 @@ const Navbar = () => {
           <a href="#" className="text-white font-medium">Templates</a>
           <hr className="border-gray-800 my-2"/>
           <a href="#" className="text-gray-400">Find an expert</a>
-          <button className="bg-[#4ADE80] text-black font-bold px-5 py-3 rounded-lg w-full">Subscribe</button>
+          <button className="bg-[#4ADE80] text-black font-bold px-5 py-3 rounded-[8px] w-full">Subscribe</button>
         </motion.div>
       )}
     </nav>
@@ -143,7 +143,7 @@ const BrowserCard = ({ website, index }: { website: any; index: number }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       whileHover={{ y: -5 }}
-      className="bg-[#16181D] rounded-xl overflow-hidden border border-gray-800/50 group hover:border-gray-700 hover:shadow-2xl transition-all duration-300"
+      className="bg-[#16181D] rounded-[12px] overflow-hidden border border-gray-800/50 group hover:border-gray-700 hover:shadow-2xl transition-all duration-300"
     >
       {/* Browser Chrome */}
       <div className="bg-[#1F2229] px-4 py-3 flex items-center gap-2 border-b border-gray-800">
@@ -152,7 +152,7 @@ const BrowserCard = ({ website, index }: { website: any; index: number }) => {
           <div className="w-2.5 h-2.5 rounded-full bg-gray-600 group-hover:bg-yellow-500 transition-colors"></div>
           <div className="w-2.5 h-2.5 rounded-full bg-gray-600 group-hover:bg-green-500 transition-colors"></div>
         </div>
-        <div className="ml-4 bg-[#16181D] px-3 py-1 rounded text-xs text-gray-400 flex-1 truncate font-mono text-center opacity-50 group-hover:opacity-100 transition-opacity">
+        <div className="ml-4 bg-[#16181D] px-3 py-1 rounded-[4px] text-xs text-gray-400 flex-1 truncate font-mono text-center opacity-50 group-hover:opacity-100 transition-opacity">
           {website.name}
         </div>
         <ExternalLink size={14} className="text-gray-600" />
@@ -173,7 +173,7 @@ const BrowserCard = ({ website, index }: { website: any; index: number }) => {
              <p className={`text-sm mb-6 max-w-xs ${website.theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
                {website.description}
              </p>
-             <button className={`px-5 py-2 rounded-lg text-sm font-bold ${website.accent} text-white shadow-lg`}>
+             <button className={`px-5 py-2 rounded-[8px] text-sm font-bold ${website.accent} text-white shadow-lg`}>
                Get Started
              </button>
            </div>
@@ -189,12 +189,12 @@ const BrowserCard = ({ website, index }: { website: any; index: number }) => {
                  {website.description}
                </p>
                <div className="flex gap-2">
-                 <button className={`px-4 py-1.5 rounded-md text-xs font-bold bg-black text-white`}>Buy $50</button>
-                 <button className={`px-4 py-1.5 rounded-md text-xs font-bold border border-gray-300 ${website.theme === 'dark' ? 'text-white' : 'text-black'}`}>Demo</button>
+                 <button className={`px-4 py-1.5 rounded-[6px] text-xs font-bold bg-black text-white`}>Buy $50</button>
+                 <button className={`px-4 py-1.5 rounded-[6px] text-xs font-bold border border-gray-300 ${website.theme === 'dark' ? 'text-white' : 'text-black'}`}>Demo</button>
                </div>
             </div>
             {/* Decorative Element */}
-            <div className={`absolute -right-12 bottom-10 w-32 h-32 rounded-xl opacity-20 rotate-12 ${website.accent}`}></div>
+            <div className={`absolute -right-12 bottom-10 w-32 h-32 rounded-[12px] opacity-20 rotate-12 ${website.accent}`}></div>
           </div>
         )}
 
@@ -210,9 +210,9 @@ const BrowserCard = ({ website, index }: { website: any; index: number }) => {
              <div className="flex-1 flex items-center">
                <div className="w-2/3 pr-4">
                   <h3 className="text-xl font-bold text-gray-900 mb-2 leading-tight">The people-first way to hire</h3>
-                  <button className="bg-yellow-400 px-3 py-1.5 rounded text-xs font-bold text-gray-900 mt-2">Start Hiring</button>
+                  <button className="bg-yellow-400 px-3 py-1.5 rounded-[4px] text-xs font-bold text-gray-900 mt-2">Start Hiring</button>
                </div>
-               <div className="w-1/3 bg-blue-50 h-24 rounded-lg border border-blue-100 flex items-center justify-center">
+               <div className="w-1/3 bg-blue-50 h-24 rounded-[8px] border border-blue-100 flex items-center justify-center">
                   <div className="w-8 h-8 bg-blue-200 rounded-full"></div>
                </div>
              </div>
@@ -223,11 +223,11 @@ const BrowserCard = ({ website, index }: { website: any; index: number }) => {
            <div className="h-full flex flex-col items-center justify-center text-center relative z-10">
               <div className="mb-4 text-xs font-mono text-gray-400">v2.0.0 released</div>
               <h3 className="text-2xl font-light text-gray-900 mb-4 tracking-tight">{website.title}</h3>
-              <div className="w-full h-32 bg-gray-50 rounded-t-xl border-t border-l border-r border-gray-200 relative overflow-hidden">
+              <div className="w-full h-32 bg-gray-50 rounded-t-[12px] border-t border-l border-r border-gray-200 relative overflow-hidden">
                  <div className="absolute top-0 left-0 w-full h-1 bg-orange-400"></div>
                  <div className="p-2 space-y-2">
-                    <div className="h-2 bg-gray-200 rounded w-3/4 mx-auto"></div>
-                    <div className="h-2 bg-gray-200 rounded w-1/2 mx-auto"></div>
+                    <div className="h-2 bg-gray-200 rounded-[4px] w-3/4 mx-auto"></div>
+                    <div className="h-2 bg-gray-200 rounded-[4px] w-1/2 mx-auto"></div>
                  </div>
               </div>
            </div>
@@ -292,7 +292,7 @@ export const SaaspoLanding: React.FC = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="w-full lg:w-[400px] bg-[#0E0F12] border border-gray-800 rounded-2xl p-8 flex flex-col justify-center shadow-2xl relative overflow-hidden"
+            className="w-full lg:w-[400px] bg-[#0E0F12] border border-gray-800 rounded-[16px] p-8 flex flex-col justify-center shadow-2xl relative overflow-hidden"
           >
             {/* Subtle glow behind card */}
             <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#4ADE80] blur-[100px] opacity-10"></div>
@@ -308,10 +308,10 @@ export const SaaspoLanding: React.FC = () => {
                  <input 
                    type="email" 
                    placeholder="Enter your email" 
-                   className="w-full bg-[#16181D] border border-gray-700 text-white pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:border-[#4ADE80] transition-colors"
+                   className="w-full bg-[#16181D] border border-gray-700 text-white pl-10 pr-4 py-3 rounded-[8px] focus:outline-none focus:border-[#4ADE80] transition-colors"
                  />
                </div>
-               <button className="w-full bg-[#4ADE80] text-black font-bold py-3 rounded-lg hover:bg-[#3ec470] transition-colors">
+               <button className="w-full bg-[#4ADE80] text-black font-bold py-3 rounded-[8px] hover:bg-[#3ec470] transition-colors">
                  Subscribe
                </button>
             </div>
