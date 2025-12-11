@@ -14,7 +14,7 @@ export interface ComponentDoc {
   description: string;
   component: React.ComponentType<any>;
   code: string;
-  category: 'Text Animations' | 'UI Components' | '3D & Interactive' | 'Forms' | 'Layout';
+  category: 'Text Animations' | 'UI Components' | '3D & Interactive' | 'Forms' | 'Layout' | 'Templates' | 'Backgrounds';
   props: PropDefinition[];
 }
 

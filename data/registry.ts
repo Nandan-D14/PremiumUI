@@ -48,8 +48,19 @@ import UnlimiHeroCode from '../components/lib/UnlimiHero.tsx?raw';
 import NebulaHeroCode from '../components/lib/NebulaHero.tsx?raw';
 import RoobertHeroCode from '../components/lib/RoobertHero.tsx?raw';
 import ModernCreativeDashboardCode from '../components/lib/ModernCreativeDashboard.tsx?raw';
+import { SpotifyDashboard } from '../components/lib/SpotifyDashboard';
+import SpotifyDashboardCode from '../components/lib/SpotifyDashboard.tsx?raw';
 
 export const COMPONENT_REGISTRY: ComponentDoc[] = [
+  {
+    slug: 'spotify-dashboard',
+    name: 'Spotify Dashboard',
+    description: 'A dark-themed music streaming dashboard clone with sidebar, sticky header, and playlist grid.',
+    category: 'Templates',
+    component: SpotifyDashboard,
+    props: [],
+    code: SpotifyDashboardCode
+  },
   {
     slug: 'roobert-hero',
     name: 'Roobert Design Hero',
