@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { cn } from '../../utils/cn';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -8,11 +8,15 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, label, error, icon, type = 'text', ...props }, ref) => {
+  ({ className, label, error, icon, type = 'text', id, ...props }, ref) => {
+    const generatedId = useId();
+    const inputId = id || generatedId;
+    const errorId = `${inputId}-error`;
+
     return (
       <div className="w-full">
         {label && (
-          <label className="block text-sm font-medium text-secondary mb-2">
+          <label htmlFor={inputId} className="block text-sm font-medium text-secondary mb-2">
             {label}
           </label>
         )}
@@ -23,6 +27,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             </div>
           )}
           <input
+            id={inputId}
             type={type}
             className={cn(
               'flex h-11 w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm text-white placeholder:text-secondary/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all disabled:cursor-not-allowed disabled:opacity-50',
@@ -31,11 +36,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               className
             )}
             ref={ref}
+            aria-invalid={!!error}
+            aria-describedby={error ? errorId : undefined}
             {...props}
           />
         </div>
         {error && (
-          <p className="mt-1.5 text-sm text-red-500">{error}</p>
+          <p id={errorId} className="mt-1.5 text-sm text-red-500">{error}</p>
         )}
       </div>
     );
