@@ -7,6 +7,7 @@ import { ComponentDetail } from './pages/ComponentDetail';
 import { ComponentsIndex } from './pages/ComponentsIndex';
 import { Docs } from './pages/Docs';
 import { TemplateRenderer } from './pages/TemplateRenderer';
+import { PremiumPreview } from './pages/PremiumPreview';
 import { ToastProvider } from './context/ToastContext';
 
 const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -53,6 +54,7 @@ const App: React.FC = () => {
             <Route path="/templates/:slug" element={<TemplateRenderer />} />
             <Route path="/docs/introduction" element={<Docs />} />
             <Route path="/docs/installation" element={<Docs />} />
+            <Route path="/premium" element={<PremiumPreview />} />
           </Routes>
         </AppLayout>
       </Router>
