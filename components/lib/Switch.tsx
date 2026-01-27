@@ -16,17 +16,17 @@ const sizeClasses = {
   sm: {
     track: 'h-5 w-9',
     thumb: 'h-4 w-4',
-    translate: 'translateX(16px)',
+    translateX: 16,
   },
   md: {
     track: 'h-6 w-11',
     thumb: 'h-5 w-5',
-    translate: 'translateX(20px)',
+    translateX: 20,
   },
   lg: {
     track: 'h-7 w-14',
     thumb: 'h-6 w-6',
-    translate: 'translateX(28px)',
+    translateX: 28,
   },
 };
 
@@ -69,7 +69,7 @@ export const Switch: React.FC<SwitchProps> = ({
         )}
         initial={false}
         animate={{
-          x: checked ? parseInt(sizeConfig.translate.replace(/[^0-9]/g, '')) : 2,
+          x: checked ? sizeConfig.translateX : 2,
         }}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
         style={{ marginTop: '2px' }}
