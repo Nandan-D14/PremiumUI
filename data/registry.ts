@@ -52,6 +52,12 @@ import { SpotifyDashboard } from '../components/lib/SpotifyDashboard';
 import SpotifyDashboardCode from '../components/lib/SpotifyDashboard.tsx?raw';
 import { DecksIntro } from '../components/lib/DecksIntro';
 import DecksIntroCode from '../components/lib/DecksIntro.tsx?raw';
+import { Avatar, AvatarGroup } from '../components/lib/Avatar';
+import { Switch } from '../components/lib/Switch';
+import { Skeleton, SkeletonText, SkeletonCard } from '../components/lib/Skeleton';
+import { Divider } from '../components/lib/Divider';
+import { Alert } from '../components/lib/Alert';
+import { Select } from '../components/lib/Select';
 
 export const COMPONENT_REGISTRY: ComponentDoc[] = [
   {
@@ -933,6 +939,429 @@ export function SingleCardExample() {
       duration="Weekend Getaway"
       onReserveClick={() => console.log('Reserve clicked')}
     />
+  );
+}`
+  },
+  {
+    slug: 'avatar',
+    name: 'Avatar',
+    description: 'A versatile avatar component for displaying user profile pictures with automatic fallback to initials. Supports multiple sizes, shapes, online status indicators, and grouping for team displays.',
+    category: 'UI Components',
+    component: Avatar,
+    props: [
+      { name: 'src', type: 'string', description: 'URL of the avatar image. Falls back to initials if loading fails.' },
+      { name: 'alt', type: 'string', default: 'Avatar', description: 'Alt text for the image, also used to generate fallback initials.' },
+      { name: 'fallback', type: 'string', description: 'Custom fallback text (max 2 characters). Overrides auto-generated initials.' },
+      { name: 'size', type: '"xs" | "sm" | "md" | "lg" | "xl"', default: 'md', description: 'Avatar size. Options range from extra small (24px) to extra large (64px).' },
+      { name: 'variant', type: '"circle" | "rounded" | "square"', default: 'circle', description: 'Shape variant of the avatar.' },
+      { name: 'status', type: '"online" | "offline" | "away" | "busy"', description: 'Status indicator shown as a colored dot on the avatar.' },
+      { name: 'border', type: 'boolean', default: 'false', description: 'Whether to show a ring border around the avatar.' },
+      { name: 'className', type: 'string', description: 'Additional CSS classes for custom styling.' },
+    ],
+    code: `// Installation: Copy the Avatar component to your project
+// Dependencies: tailwind-merge
+
+import { Avatar, AvatarGroup } from './components/lib/Avatar';
+
+export function Example() {
+  return (
+    <div className="space-y-8">
+      {/* Basic Avatars */}
+      <div className="flex items-center gap-4">
+        <Avatar 
+          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100" 
+          alt="John Doe"
+        />
+        <Avatar alt="Jane Smith" /> {/* Falls back to initials "JS" */}
+        <Avatar fallback="AI" /> {/* Custom fallback */}
+      </div>
+      
+      {/* Sizes */}
+      <div className="flex items-end gap-4">
+        <Avatar size="xs" alt="User" />
+        <Avatar size="sm" alt="User" />
+        <Avatar size="md" alt="User" />
+        <Avatar size="lg" alt="User" />
+        <Avatar size="xl" alt="User" />
+      </div>
+      
+      {/* With Status Indicators */}
+      <div className="flex items-center gap-4">
+        <Avatar alt="Online User" status="online" />
+        <Avatar alt="Busy User" status="busy" />
+        <Avatar alt="Away User" status="away" />
+        <Avatar alt="Offline User" status="offline" />
+      </div>
+      
+      {/* Variants */}
+      <div className="flex items-center gap-4">
+        <Avatar variant="circle" alt="Circle" />
+        <Avatar variant="rounded" alt="Rounded" />
+        <Avatar variant="square" alt="Square" />
+      </div>
+      
+      {/* Avatar Group */}
+      <AvatarGroup max={4}>
+        <Avatar alt="User 1" />
+        <Avatar alt="User 2" />
+        <Avatar alt="User 3" />
+        <Avatar alt="User 4" />
+        <Avatar alt="User 5" />
+        <Avatar alt="User 6" />
+      </AvatarGroup>
+    </div>
+  );
+}`
+  },
+  {
+    slug: 'switch',
+    name: 'Switch',
+    description: 'An animated toggle switch component for binary settings. Features smooth spring animations, multiple sizes, and optional label with description text. Perfect for settings panels and preference toggles.',
+    category: 'UI Components',
+    component: Switch,
+    props: [
+      { name: 'checked', type: 'boolean', default: 'false', description: 'Whether the switch is in the on position.' },
+      { name: 'onChange', type: '(checked: boolean) => void', description: 'Callback fired when the switch state changes.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the switch is disabled and non-interactive.' },
+      { name: 'size', type: '"sm" | "md" | "lg"', default: 'md', description: 'Size variant of the switch.' },
+      { name: 'label', type: 'string', description: 'Label text displayed next to the switch.' },
+      { name: 'description', type: 'string', description: 'Description text displayed below the label.' },
+      { name: 'className', type: 'string', description: 'Additional CSS classes for custom styling.' },
+    ],
+    code: `// Installation: Copy the Switch component to your project
+// Dependencies: framer-motion, tailwind-merge
+
+import { Switch } from './components/lib/Switch';
+import { useState } from 'react';
+
+export function Example() {
+  const [notifications, setNotifications] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const [autoSave, setAutoSave] = useState(true);
+
+  return (
+    <div className="space-y-6 max-w-md">
+      {/* Basic Switch */}
+      <Switch 
+        checked={notifications} 
+        onChange={setNotifications} 
+      />
+      
+      {/* With Label */}
+      <Switch 
+        checked={darkMode} 
+        onChange={setDarkMode}
+        label="Dark Mode"
+      />
+      
+      {/* With Label and Description */}
+      <Switch 
+        checked={autoSave} 
+        onChange={setAutoSave}
+        label="Auto-save"
+        description="Automatically save your work every 5 minutes"
+      />
+      
+      {/* Different Sizes */}
+      <div className="flex items-center gap-6">
+        <Switch size="sm" checked={true} onChange={() => {}} />
+        <Switch size="md" checked={true} onChange={() => {}} />
+        <Switch size="lg" checked={true} onChange={() => {}} />
+      </div>
+      
+      {/* Disabled State */}
+      <Switch 
+        checked={true} 
+        disabled 
+        label="Disabled Switch"
+        description="This setting cannot be changed"
+      />
+    </div>
+  );
+}`
+  },
+  {
+    slug: 'skeleton',
+    name: 'Skeleton',
+    description: 'Loading placeholder components that mimic the shape of content while data is being fetched. Includes pulse and wave animations, multiple shape variants, and preset compositions for common UI patterns like cards and text blocks.',
+    category: 'UI Components',
+    component: Skeleton,
+    props: [
+      { name: 'variant', type: '"text" | "circular" | "rectangular" | "rounded"', default: 'text', description: 'Shape variant of the skeleton.' },
+      { name: 'width', type: 'string | number', description: 'Width of the skeleton. Numbers are treated as pixels.' },
+      { name: 'height', type: 'string | number', description: 'Height of the skeleton. Numbers are treated as pixels.' },
+      { name: 'animation', type: '"pulse" | "wave" | "none"', default: 'pulse', description: 'Animation style for the loading effect.' },
+      { name: 'className', type: 'string', description: 'Additional CSS classes for custom styling.' },
+    ],
+    code: `// Installation: Copy the Skeleton component to your project
+// Dependencies: tailwind-merge
+
+import { Skeleton, SkeletonText, SkeletonCard } from './components/lib/Skeleton';
+
+export function Example() {
+  return (
+    <div className="space-y-8">
+      {/* Basic Skeletons */}
+      <div className="space-y-2">
+        <Skeleton variant="text" width="100%" />
+        <Skeleton variant="text" width="80%" />
+        <Skeleton variant="text" width="60%" />
+      </div>
+      
+      {/* Shape Variants */}
+      <div className="flex items-center gap-4">
+        <Skeleton variant="circular" width={48} height={48} />
+        <Skeleton variant="rounded" width={100} height={48} />
+        <Skeleton variant="rectangular" width={100} height={48} />
+      </div>
+      
+      {/* User Profile Skeleton */}
+      <div className="flex items-center gap-4">
+        <Skeleton variant="circular" width={56} height={56} />
+        <div className="space-y-2 flex-1">
+          <Skeleton variant="text" width="40%" height={20} />
+          <Skeleton variant="text" width="60%" height={16} />
+        </div>
+      </div>
+      
+      {/* SkeletonText Preset */}
+      <SkeletonText lines={4} />
+      
+      {/* SkeletonCard Preset */}
+      <div className="grid grid-cols-2 gap-4 max-w-2xl">
+        <SkeletonCard />
+        <SkeletonCard hasImage={false} />
+      </div>
+      
+      {/* Animation Variants */}
+      <div className="space-y-4">
+        <Skeleton animation="pulse" width="100%" height={24} />
+        <Skeleton animation="wave" width="100%" height={24} />
+        <Skeleton animation="none" width="100%" height={24} />
+      </div>
+    </div>
+  );
+}`
+  },
+  {
+    slug: 'divider',
+    name: 'Divider',
+    description: 'A flexible separator component for visually dividing content sections. Supports horizontal and vertical orientations, multiple line styles (solid, dashed, dotted, gradient), and optional labels with configurable positioning.',
+    category: 'UI Components',
+    component: Divider,
+    props: [
+      { name: 'orientation', type: '"horizontal" | "vertical"', default: 'horizontal', description: 'Direction of the divider.' },
+      { name: 'variant', type: '"solid" | "dashed" | "dotted" | "gradient"', default: 'solid', description: 'Line style variant.' },
+      { name: 'label', type: 'ReactNode', description: 'Optional label to display in the middle of the divider.' },
+      { name: 'labelPosition', type: '"left" | "center" | "right"', default: 'center', description: 'Position of the label along the divider.' },
+      { name: 'className', type: 'string', description: 'Additional CSS classes for custom styling.' },
+    ],
+    code: `// Installation: Copy the Divider component to your project
+// Dependencies: tailwind-merge
+
+import { Divider } from './components/lib/Divider';
+
+export function Example() {
+  return (
+    <div className="space-y-8 max-w-md">
+      {/* Basic Horizontal Dividers */}
+      <div className="space-y-6">
+        <Divider />
+        <Divider variant="dashed" />
+        <Divider variant="dotted" />
+        <Divider variant="gradient" />
+      </div>
+      
+      {/* With Labels */}
+      <Divider label="Or continue with" />
+      <Divider label="Section" labelPosition="left" />
+      <Divider label="End" labelPosition="right" />
+      
+      {/* Vertical Divider */}
+      <div className="flex items-center gap-4 h-12">
+        <span className="text-white">Left</span>
+        <Divider orientation="vertical" />
+        <span className="text-white">Middle</span>
+        <Divider orientation="vertical" variant="gradient" />
+        <span className="text-white">Right</span>
+      </div>
+      
+      {/* In a Form Layout */}
+      <div className="space-y-4">
+        <button className="w-full py-2 px-4 bg-primary text-white rounded-lg">
+          Continue with Email
+        </button>
+        <Divider label="or" />
+        <button className="w-full py-2 px-4 bg-surface text-white border border-border rounded-lg">
+          Continue with Google
+        </button>
+      </div>
+    </div>
+  );
+}`
+  },
+  {
+    slug: 'alert',
+    name: 'Alert',
+    description: 'Contextual notification banners for displaying important messages to users. Includes four semantic variants (info, success, warning, error), optional titles, dismissible functionality with smooth animations, and customizable icons.',
+    category: 'UI Components',
+    component: Alert,
+    props: [
+      { name: 'variant', type: '"info" | "success" | "warning" | "error"', default: 'info', description: 'Semantic color variant of the alert.' },
+      { name: 'title', type: 'string', description: 'Bold heading text for the alert.' },
+      { name: 'children', type: 'ReactNode', description: 'Main content/message of the alert.' },
+      { name: 'icon', type: 'ReactNode', description: 'Custom icon to override the default variant icon.' },
+      { name: 'dismissible', type: 'boolean', default: 'false', description: 'Whether to show a close button to dismiss the alert.' },
+      { name: 'onDismiss', type: '() => void', description: 'Callback fired when the alert is dismissed.' },
+      { name: 'className', type: 'string', description: 'Additional CSS classes for custom styling.' },
+    ],
+    code: `// Installation: Copy the Alert component to your project
+// Dependencies: framer-motion, lucide-react, tailwind-merge
+
+import { Alert } from './components/lib/Alert';
+import { Rocket } from 'lucide-react';
+
+export function Example() {
+  return (
+    <div className="space-y-4 max-w-lg">
+      {/* Info Alert */}
+      <Alert variant="info" title="Did you know?">
+        You can customize your dashboard layout in the settings panel.
+      </Alert>
+      
+      {/* Success Alert */}
+      <Alert variant="success" title="Payment Successful">
+        Your payment of $99.00 has been processed successfully.
+      </Alert>
+      
+      {/* Warning Alert */}
+      <Alert variant="warning" title="Storage Almost Full">
+        You've used 90% of your storage. Consider upgrading your plan.
+      </Alert>
+      
+      {/* Error Alert */}
+      <Alert variant="error" title="Upload Failed">
+        There was an error uploading your file. Please try again.
+      </Alert>
+      
+      {/* Dismissible Alert */}
+      <Alert 
+        variant="info" 
+        title="Welcome!"
+        dismissible
+        onDismiss={() => console.log('Alert dismissed')}
+      >
+        Click the X button to dismiss this alert.
+      </Alert>
+      
+      {/* Simple Alert (no title) */}
+      <Alert variant="success">
+        Your changes have been saved automatically.
+      </Alert>
+      
+      {/* Custom Icon */}
+      <Alert 
+        variant="info" 
+        icon={<Rocket className="h-5 w-5" />}
+        title="New Feature"
+      >
+        Check out our latest features in the what's new section.
+      </Alert>
+    </div>
+  );
+}`
+  },
+  {
+    slug: 'select',
+    name: 'Select',
+    description: 'A fully-featured dropdown select component with keyboard navigation, search filtering, and smooth animations. Supports single selection, custom option icons, disabled options, and error states. Perfect for forms and settings.',
+    category: 'UI Components',
+    component: Select,
+    props: [
+      { name: 'options', type: '{ value: string, label: string, disabled?: boolean, icon?: ReactNode }[]', description: 'Array of selectable options.' },
+      { name: 'value', type: 'string', description: 'Currently selected value.' },
+      { name: 'onChange', type: '(value: string) => void', description: 'Callback fired when selection changes.' },
+      { name: 'placeholder', type: 'string', default: 'Select an option', description: 'Placeholder text when no option is selected.' },
+      { name: 'label', type: 'string', description: 'Label text displayed above the select.' },
+      { name: 'error', type: 'string', description: 'Error message displayed below the select.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the select is disabled.' },
+      { name: 'searchable', type: 'boolean', default: 'false', description: 'Whether to show a search input to filter options.' },
+      { name: 'className', type: 'string', description: 'Additional CSS classes for custom styling.' },
+    ],
+    code: `// Installation: Copy the Select component to your project
+// Dependencies: framer-motion, lucide-react, tailwind-merge
+
+import { Select } from './components/lib/Select';
+import { useState } from 'react';
+import { Globe, Moon, Sun, Monitor } from 'lucide-react';
+
+export function Example() {
+  const [country, setCountry] = useState('');
+  const [theme, setTheme] = useState('system');
+
+  const countryOptions = [
+    { value: 'us', label: 'United States' },
+    { value: 'uk', label: 'United Kingdom' },
+    { value: 'ca', label: 'Canada' },
+    { value: 'au', label: 'Australia' },
+    { value: 'de', label: 'Germany' },
+    { value: 'fr', label: 'France' },
+    { value: 'jp', label: 'Japan' },
+    { value: 'kr', label: 'South Korea', disabled: true },
+  ];
+
+  const themeOptions = [
+    { value: 'light', label: 'Light', icon: <Sun className="h-4 w-4" /> },
+    { value: 'dark', label: 'Dark', icon: <Moon className="h-4 w-4" /> },
+    { value: 'system', label: 'System', icon: <Monitor className="h-4 w-4" /> },
+  ];
+
+  return (
+    <div className="space-y-6 max-w-sm">
+      {/* Basic Select */}
+      <Select
+        label="Country"
+        options={countryOptions}
+        value={country}
+        onChange={setCountry}
+        placeholder="Select your country"
+      />
+      
+      {/* Searchable Select */}
+      <Select
+        label="Country (Searchable)"
+        options={countryOptions}
+        value={country}
+        onChange={setCountry}
+        placeholder="Search countries..."
+        searchable
+      />
+      
+      {/* Select with Icons */}
+      <Select
+        label="Theme"
+        options={themeOptions}
+        value={theme}
+        onChange={setTheme}
+      />
+      
+      {/* Select with Error */}
+      <Select
+        label="Required Field"
+        options={countryOptions}
+        value=""
+        onChange={() => {}}
+        error="Please select an option"
+      />
+      
+      {/* Disabled Select */}
+      <Select
+        label="Disabled"
+        options={countryOptions}
+        value="us"
+        disabled
+      />
+    </div>
   );
 }`
   }
