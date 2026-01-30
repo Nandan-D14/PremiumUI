@@ -9,31 +9,31 @@ interface SidebarProps {
   onClose: () => void;
 }
 
+// Group components by category - moved outside component to prevent recalculation on every render
+const categories = Array.from(new Set(COMPONENT_REGISTRY.map(c => c.category)));
+
+const componentSections: SidebarSection[] = categories.map(cat => ({
+  title: cat,
+  items: COMPONENT_REGISTRY
+    .filter(c => c.category === cat)
+    .map(c => ({
+      title: c.name,
+      path: `/components/${c.slug}`,
+    }))
+}));
+
+const mainSections: SidebarSection[] = [
+  {
+    title: 'Getting Started',
+    items: [
+      { title: 'Introduction', path: '/docs/introduction' },
+      { title: 'Installation', path: '/docs/installation' },
+    ]
+  },
+  ...componentSections
+];
+
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
-  // Group components by category
-  const categories = Array.from(new Set(COMPONENT_REGISTRY.map(c => c.category)));
-  
-  const componentSections: SidebarSection[] = categories.map(cat => ({
-    title: cat,
-    items: COMPONENT_REGISTRY
-      .filter(c => c.category === cat)
-      .map(c => ({
-        title: c.name,
-        path: `/components/${c.slug}`,
-      }))
-  }));
-
-  const mainSections: SidebarSection[] = [
-    {
-      title: 'Getting Started',
-      items: [
-        { title: 'Introduction', path: '/docs/introduction' },
-        { title: 'Installation', path: '/docs/installation' },
-      ]
-    },
-    ...componentSections
-  ];
-
   return (
     <>
       {/* Mobile Overlay */}
