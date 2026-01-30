@@ -62,16 +62,11 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
       }
 
       // Draw the glowing path
-      ctx.beginPath();
-      // Glow settings
-      ctx.shadowBlur = 40;
-      ctx.shadowColor = 'rgba(200, 255, 255, 0.5)';
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-      ctx.lineWidth = 4;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-
       if (particles.length > 1) {
+        ctx.beginPath();
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
         ctx.moveTo(particles[0].x, particles[0].y);
         // Draw quadratic bezier curve for smoothness
         for (let i = 1; i < particles.length - 1; i++) {
@@ -79,6 +74,16 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
           const yc = (particles[i].y + particles[i + 1].y) / 2;
           ctx.quadraticCurveTo(particles[i].x, particles[i].y, xc, yc);
         }
+
+        // Draw outer glow (simulated with wide semi-transparent stroke)
+        // This replaces costly shadowBlur
+        ctx.strokeStyle = 'rgba(200, 255, 255, 0.2)';
+        ctx.lineWidth = 30;
+        ctx.stroke();
+
+        // Draw inner core
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+        ctx.lineWidth = 4;
         ctx.stroke();
       }
       
@@ -91,8 +96,7 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
         gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
         
         ctx.fillStyle = gradient;
-        ctx.shadowBlur = 60;
-        ctx.shadowColor = 'cyan';
+        // Removed costly shadowBlur, relying on radial gradient and CSS blur
         ctx.beginPath();
         ctx.arc(head.x, head.y, 20, 0, Math.PI * 2);
         ctx.fill();
