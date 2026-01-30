@@ -26,6 +26,16 @@ export const ComponentsIndex: React.FC = () => {
     return Array.from(new Set(COMPONENT_REGISTRY.map(c => c.category)));
   }, []);
 
+  const groupedComponents = useMemo(() => {
+    return filteredComponents.reduce((acc, component) => {
+      if (!acc[component.category]) {
+        acc[component.category] = [];
+      }
+      acc[component.category].push(component);
+      return acc;
+    }, {} as Record<string, typeof filteredComponents>);
+  }, [filteredComponents]);
+
   const toggleCategory = (category: string) => {
     setCollapsedCategories(prev => 
       prev.includes(category) 
@@ -76,7 +86,7 @@ export const ComponentsIndex: React.FC = () => {
       {filteredComponents.length > 0 ? (
         <div className="space-y-8">
           {allCategories.map(category => {
-            const categoryComponents = filteredComponents.filter(c => c.category === category);
+            const categoryComponents = groupedComponents[category] || [];
             
             // If no components match in this category, don't render the section
             if (categoryComponents.length === 0) return null;
