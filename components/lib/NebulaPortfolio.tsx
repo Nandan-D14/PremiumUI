@@ -42,7 +42,7 @@ export const NebulaNavBar = () => (
   </motion.header>
 );
 
-export const NebulaHero = () => (
+const NebulaHero = () => (
   <section className="relative z-10 flex flex-col items-center justify-center min-h-[800px] h-full text-center px-4 w-full">
     
     <motion.div

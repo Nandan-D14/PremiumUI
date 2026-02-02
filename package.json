@@ -1,16 +1,48 @@
 {
   "name": "react-ui-component-library",
-  "private": true,
   "version": "2.0.0",
   "description": "A premium collection of 44+ animated React components built with Tailwind CSS and Framer Motion",
   "type": "module",
+  "files": [
+    "dist",
+    "theme.css",
+    "tailwind.preset.js"
+  ],
+  "main": "./dist/premium-ui.cjs.js",
+  "module": "./dist/premium-ui.es.js",
+  "types": "./dist/lib.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/lib.d.ts",
+      "import": "./dist/premium-ui.es.js",
+      "require": "./dist/premium-ui.cjs.js"
+    },
+    "./theme.css": "./theme.css",
+    "./tailwind.preset.js": "./tailwind.preset.js"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:lib": "vite build -c vite.lib.config.ts",
     "preview": "vite preview"
+  },
+  "peerDependencies": {
+    "framer-motion": "^12.0.0",
+    "lucide-react": "^0.555.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.0.0",
+    "recharts": "^3.0.0"
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.0.0",
     "framer-motion": "^12.23.25",
     "lucide-react": "^0.555.0",
     "react": "^19.2.0",
@@ -18,12 +50,8 @@
     "react-router-dom": "^7.9.6",
     "react-syntax-highlighter": "^16.1.0",
     "recharts": "^3.5.1",
-    "tailwind-merge": "^3.4.0"
-  },
-  "devDependencies": {
-    "@types/node": "^22.14.0",
-    "@vitejs/plugin-react": "^5.0.0",
     "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "vite-plugin-dts": "^4.5.4"
   }
 }
