@@ -18,6 +18,8 @@ import {
   Plus
 } from 'lucide-react';
 
+const DOTS_ARRAY = [...Array(20)];
+
 export const DecksIntro = () => {
   const [selectedType, setSelectedType] = useState('solo'); // 'solo' or 'team'
 
@@ -240,11 +242,11 @@ export const DecksIntro = () => {
                      <div className="grid grid-cols-2 gap-2">
                         {/* Dot Grid Visualization */}
                         <div className="flex flex-wrap gap-0.5">
-                           {[...Array(20)].map((_, i) => <div key={i} className={`w-1 h-1 rounded-full ${i < 12 ? 'bg-orange-500' : 'bg-gray-700'}`}></div>)}
+                           {DOTS_ARRAY.map((_, i) => <div key={i} className={`w-1 h-1 rounded-full ${i < 12 ? 'bg-orange-500' : 'bg-gray-700'}`}></div>)}
                            <div className="w-full text-[8px] text-gray-400 mt-1">Documents <span className="text-orange-400 ml-1">57%</span></div>
                         </div>
                         <div className="flex flex-wrap gap-0.5">
-                           {[...Array(20)].map((_, i) => <div key={i} className={`w-1 h-1 rounded-full ${i < 18 ? 'bg-green-500' : 'bg-gray-700'}`}></div>)}
+                           {DOTS_ARRAY.map((_, i) => <div key={i} className={`w-1 h-1 rounded-full ${i < 18 ? 'bg-green-500' : 'bg-gray-700'}`}></div>)}
                            <div className="w-full text-[8px] text-gray-400 mt-1">Consent <span className="text-green-400 ml-1">86%</span></div>
                         </div>
                      </div>
