@@ -8,6 +8,7 @@ import { ComponentsIndex } from './pages/ComponentsIndex';
 import { Docs } from './pages/Docs';
 import { TemplateRenderer } from './pages/TemplateRenderer';
 import { ToastProvider } from './context/ToastContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
@@ -31,7 +32,7 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           />
         )}
         
-        <main className={`flex-1 min-w-0 ${!isHome ? 'lg:pl-80' : ''}`}>
+        <main className={`flex-1 min-w-0 ${!isHome ? 'lg:pl-72' : ''}`}>
           <div className={`mx-auto ${isHome ? 'px-0' : 'px-4 sm:px-6 lg:px-8 py-10'}`}>
             {children}
           </div>
@@ -43,20 +44,22 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const App: React.FC = () => {
   return (
-    <ToastProvider>
-      <Router>
-        <AppLayout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/components" element={<ComponentsIndex />} />
-            <Route path="/components/:slug" element={<ComponentDetail />} />
-            <Route path="/templates/:slug" element={<TemplateRenderer />} />
-            <Route path="/docs/introduction" element={<Docs />} />
-            <Route path="/docs/installation" element={<Docs />} />
-          </Routes>
-        </AppLayout>
-      </Router>
-    </ToastProvider>
+    <ThemeProvider>
+      <ToastProvider>
+        <Router>
+          <AppLayout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/components" element={<ComponentsIndex />} />
+              <Route path="/components/:slug" element={<ComponentDetail />} />
+              <Route path="/templates/:slug" element={<TemplateRenderer />} />
+              <Route path="/docs/introduction" element={<Docs />} />
+              <Route path="/docs/installation" element={<Docs />} />
+            </Routes>
+          </AppLayout>
+        </Router>
+      </ToastProvider>
+    </ThemeProvider>
   );
 };
 

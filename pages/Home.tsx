@@ -4,7 +4,7 @@ import { ShimmerButton } from '../components/lib/ShimmerButton';
 import { ComponentPreview } from '../components/landing/ComponentPreview';
 import { Footer } from '../components/layout/Footer';
 import { Hero } from '../components/landing/Hero';
-import { FeatureGrid } from '../components/landing/FeatureGrid';
+import { BentoGrid } from '../components/landing/BentoGrid';
 import { Testimonials } from '../components/landing/Testimonials';
 import { FAQ } from '../components/landing/FAQ';
 import { ArrowRight, Copy, Settings, Zap } from 'lucide-react';
@@ -17,7 +17,7 @@ export const Home: React.FC = () => {
 
       <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         {/* Feature Grid */}
-        <FeatureGrid />
+        <BentoGrid />
         
         {/* How It Works Section */}
         <div className="py-32 relative max-w-7xl mx-auto">
@@ -35,35 +35,35 @@ export const Home: React.FC = () => {
                { 
                  title: 'Browse', 
                  desc: 'Explore our extensive library of premium, animated components.',
-                 icon: <SearchIcon className="w-8 h-8 text-white" />,
-                 gradient: 'from-blue-500/20 to-cyan-500/20',
+                 icon: <SearchIcon className="w-8 h-8 text-primary" />,
+                 gradient: 'from-blue-500/10 to-cyan-500/10',
                  border: 'group-hover:border-blue-500/50'
                },
                { 
                  title: 'Copy', 
                  desc: 'One click to copy the code. No npm install required.',
-                 icon: <Copy className="w-8 h-8 text-white" />,
-                 gradient: 'from-violet-500/20 to-fuchsia-500/20',
+                 icon: <Copy className="w-8 h-8 text-primary" />,
+                 gradient: 'from-violet-500/10 to-fuchsia-500/10',
                  border: 'group-hover:border-violet-500/50'
                },
                { 
                  title: 'Ship', 
                  desc: 'Paste into your project and deploy. It just works.',
-                 icon: <Zap className="w-8 h-8 text-white" />,
-                 gradient: 'from-emerald-500/20 to-lime-500/20',
+                 icon: <Zap className="w-8 h-8 text-primary" />,
+                 gradient: 'from-emerald-500/10 to-lime-500/10',
                  border: 'group-hover:border-emerald-500/50'
                }
              ].map((step, i) => (
                <div key={i} className="group relative h-full">
-                 <div className={`absolute inset-0 bg-gradient-to-br ${step.gradient} rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500`} />
-                 <div className={`relative h-full bg-card/50 backdrop-blur-xl border border-white/10 rounded-2xl p-8 flex flex-col items-start overflow-hidden transition-all duration-300 group-hover:-translate-y-2 ${step.border}`}>
+                 <div className={`absolute inset-0 bg-gradient-to-br ${step.gradient} rounded-2xl blur-xl opacity-0 group-hover:opacity-100 dark:group-hover:opacity-50 transition-opacity duration-500`} />
+                 <div className={`relative h-full bg-card border border-border rounded-2xl p-8 flex flex-col items-start overflow-hidden transition-all duration-300 group-hover:-translate-y-2 ${step.border}`}>
                    
                    {/* Large Watermark Number */}
                    <div className="absolute -right-4 -top-4 text-9xl font-black text-foreground/5 select-none z-0">
                      0{i + 1}
                    </div>
 
-                   <div className="relative z-10 w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                   <div className="relative z-10 w-16 h-16 rounded-2xl bg-muted border border-border flex items-center justify-center mb-8 shadow-inner group-hover:scale-110 transition-transform duration-500">
                      {step.icon}
                    </div>
                    
@@ -91,16 +91,16 @@ export const Home: React.FC = () => {
 
       {/* CTA Section */}
       <div className="relative z-10 mx-auto max-w-5xl px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="relative mt-24 rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-b from-white/5 to-black/40 p-12 md:p-24 text-center shadow-2xl">
+        <div className="relative mt-24 rounded-3xl overflow-hidden border border-border bg-card p-12 md:p-24 text-center shadow-2xl">
           {/* Animated Grid Background */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(128,128,128,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(128,128,128,0.1)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
           
           <div className="relative z-10">
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-8">
+            <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter mb-8">
               Ready to build <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">something amazing?</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">something amazing?</span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-12">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12">
               Join thousands of developers building better UIs, faster. 
               Open source, free forever.
             </p>

@@ -103,8 +103,7 @@ export const ComponentDetail: React.FC = () => {
   };
 
   const handleReset = () => {
-     // Re-trigger effect or manually reset (simplest is to re-run the init logic, but here we can just reload the page or simplified reset)
-     // For now, let's just re-run the specific overrides we know
+     // Re-trigger effect
      const initialProps: Record<string, any> = { ...demoProps };
      componentData.props.forEach(prop => {
          if (prop.name === 'children' || prop.name === 'className') return;
@@ -125,79 +124,91 @@ export const ComponentDetail: React.FC = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto pb-20">
-      <div className="mb-10">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground mb-2">{componentData.name}</h1>
-        <p className="text-lg text-muted-foreground">{componentData.description}</p>
+    <div className="max-w-7xl mx-auto pb-20 px-4 sm:px-6 lg:px-8 pt-8">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold tracking-tight text-foreground mb-4">{componentData.name}</h1>
+        <p className="text-xl text-muted-foreground max-w-2xl">{componentData.description}</p>
       </div>
 
-      <div className="mb-6 flex items-center gap-1 border-b border-border">
-        <button
-          onClick={() => setActiveTab('preview')}
-          className={cn(
-            "flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-all border-b-2 relative -bottom-px",
-            activeTab === 'preview' 
-              ? "border-primary text-foreground" 
-              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
-          )}
-        >
-          <Eye size={16} /> Preview
-        </button>
-        <button
-          onClick={() => setActiveTab('code')}
-          className={cn(
-            "flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-all border-b-2 relative -bottom-px",
-            activeTab === 'code' 
-              ? "border-primary text-foreground" 
-              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
-          )}
-        >
-          <Code size={16} /> Code
-        </button>
+      {/* Tabs */}
+      <div className="mb-6 flex items-center gap-2">
+        <div className="p-1 bg-muted/50 rounded-lg flex items-center gap-1 border border-border">
+          <button
+            onClick={() => setActiveTab('preview')}
+            className={cn(
+              "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all",
+              activeTab === 'preview'
+                ? "bg-background text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+            )}
+          >
+            <Eye size={16} /> Preview
+          </button>
+          <button
+            onClick={() => setActiveTab('code')}
+            className={cn(
+              "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all",
+              activeTab === 'code'
+                ? "bg-background text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+            )}
+          >
+            <Code size={16} /> Code
+          </button>
+        </div>
+
         {componentData.category === 'Templates' && (
           <a
             href={`/#/templates/${componentData.slug}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-auto flex items-center gap-2 px-3 py-1.5 text-xs font-medium transition-colors text-muted-foreground hover:text-foreground bg-muted hover:bg-muted/80 rounded-md"
+            className="ml-auto flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 rounded-lg"
           >
-            View Full Template <ArrowRight size={14} />
+            View Full Template <ArrowRight size={16} />
           </a>
         )}
       </div>
 
+      {/* Main Content */}
       <div className={cn(
         "relative rounded-xl border border-border bg-card shadow-sm overflow-hidden",
-        componentData.category === 'Templates' ? 'min-h-[800px]' : 'min-h-[500px]'
+        componentData.category === 'Templates' ? 'min-h-[800px]' : 'min-h-[600px]'
       )}>
         {activeTab === 'preview' ? (
           <div className={cn(
             "flex h-full",
-            componentData.category === 'Templates' ? 'flex-col min-h-[800px]' : 'flex-col lg:flex-row min-h-[500px]'
+            componentData.category === 'Templates' ? 'flex-col min-h-[800px]' : 'flex-col lg:flex-row min-h-[600px]'
           )}>
              {/* Preview Canvas */}
              <div className={cn(
-               "relative overflow-hidden flex items-center justify-center",
-               componentData.category === 'Templates' 
-                 ? 'flex-1 bg-background p-0' 
-                 : 'flex-1 bg-[radial-gradient(#18181b_1px,transparent_1px)] [background-size:16px_16px] p-8 sm:p-12'
+               "relative flex-1 overflow-hidden flex items-center justify-center p-8 sm:p-12 min-h-[400px]",
+               componentData.category === 'Templates' ? 'p-0 bg-background' : 'bg-background'
              )}>
+                 {/* Dot Pattern Background */}
+                 {componentData.category !== 'Templates' && (
+                   <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#27272a_1px,transparent_1px)] [background-size:16px_16px]" />
+                 )}
+
                  <div className={cn(
-                   "z-10",
-                   componentData.category === 'Templates' 
-                     ? 'w-full h-full' 
-                     : 'w-full max-w-md mx-auto'
+                   "relative z-10 w-full",
+                   componentData.category === 'Templates' ? 'h-full' : 'max-w-md mx-auto'
                  )}>
+                   {/*
+                      Inject Component Render Here
+                      Note: Since we are rewriting the file, I need to include all the conditional rendering logic again.
+                      For brevity, I'll copy the logic from the previous file but wrap it nicely.
+                   */}
                    {componentData.slug === 'split-text' && (
                      <Component 
                        text={demoProps.text || "Animated Text Reveal"} 
-                       className="text-5xl font-bold text-white text-center"
+                       className="text-5xl font-bold text-foreground text-center"
                        delay={Number(demoProps.delay)}
                      />
                    )}
                    {componentData.slug === 'spotlight-card' && (
                      <Component 
-                        className="p-8 aspect-square flex flex-col justify-center items-center text-center"
+                        className="p-8 aspect-square flex flex-col justify-center items-center text-center bg-zinc-900 border-zinc-800"
                         spotlightColor={demoProps.spotlightColor}
                      >
                         <div className="h-12 w-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
@@ -207,6 +218,8 @@ export const ComponentDetail: React.FC = () => {
                         <p className="text-white/70 mt-2">I have a spotlight effect!</p>
                      </Component>
                    )}
+                   {/* ... (Other component render logic needs to be preserved. I will paste the previous block but update text colors to be theme aware where possible, e.g. text-foreground instead of text-white if appropriate, though many components are dark-only by design) */}
+                   {/* START COPIED LOGIC */}
                    {componentData.slug === 'tilted-card' && (
                       <div className="h-[300px] flex items-center justify-center perspective-1000">
                         <Component 
@@ -230,7 +243,7 @@ export const ComponentDetail: React.FC = () => {
                        >
                          Click Me
                        </Component>
-                       <p className="text-sm text-white/70">Try changing the variant and size in the controls</p>
+                       <p className="text-sm text-muted-foreground">Try changing the variant and size in the controls</p>
                      </div>
                    )}
                    {componentData.slug === 'input' && (
@@ -240,7 +253,7 @@ export const ComponentDetail: React.FC = () => {
                          placeholder="Enter your email"
                          error={demoProps.error}
                        />
-                       <p className="text-sm text-white/70">Try adding an error message in the controls</p>
+                       <p className="text-sm text-muted-foreground">Try adding an error message in the controls</p>
                      </div>
                    )}
                    {componentData.slug === 'badge' && (
@@ -248,23 +261,21 @@ export const ComponentDetail: React.FC = () => {
                        <div className="flex flex-wrap gap-3 justify-center">
                          <Component variant={demoProps.variant || 'default'}>Badge</Component>
                        </div>
-                       <p className="text-sm text-white/70">Try different variants in the controls</p>
                      </div>
                    )}
                    {componentData.slug === 'card' && (
                      <div className="w-full space-y-4">
-                       <Component hover={demoProps.hover}>
+                       <Component hover={demoProps.hover} className="bg-card text-card-foreground">
                          <div className="p-6">
-                           <h3 className="text-xl font-bold text-white mb-2">Card Title</h3>
-                           <p className="text-white/70">This is a card component with customizable content.</p>
+                           <h3 className="text-xl font-bold mb-2">Card Title</h3>
+                           <p className="text-muted-foreground">This is a card component with customizable content.</p>
                          </div>
                        </Component>
-                       <p className="text-sm text-white/70 text-center">Toggle hover effect in controls</p>
                      </div>
                    )}
                    {componentData.slug === 'glowing-card' && (
                      <div className="w-full">
-                       <Component glowColor={demoProps.glowColor || '#8b5cf6'}>
+                       <Component glowColor={demoProps.glowColor || '#8b5cf6'} className="bg-zinc-900">
                          <div className="h-12 w-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
                            <span className="text-2xl">✨</span>
                          </div>
@@ -278,12 +289,11 @@ export const ComponentDetail: React.FC = () => {
                        <Component shimmerColor={demoProps.shimmerColor}>
                          Shimmer Button
                        </Component>
-                       <p className="text-sm text-white/70">Watch the shimmer animation</p>
                      </div>
                    )}
                    {componentData.slug === 'parallax-card' && (
                      <div className="w-full">
-                       <Component intensity={Number(demoProps.intensity) || 20}>
+                       <Component intensity={Number(demoProps.intensity) || 20} className="bg-gradient-to-br from-zinc-800 to-zinc-900 border-zinc-700">
                          <h3 className="text-xl font-bold text-white mb-2">Parallax Card</h3>
                          <p className="text-white/70">Move your mouse to see the 3D effect</p>
                        </Component>
@@ -295,9 +305,8 @@ export const ComponentDetail: React.FC = () => {
                          text={demoProps.text || "Hello, I'm a typewriter effect!"} 
                          speed={Number(demoProps.speed) || 50}
                          cursor={demoProps.cursor !== false}
-                         className="text-2xl font-bold text-white text-center"
+                         className="text-2xl font-bold text-foreground text-center"
                        />
-                       <p className="text-sm text-white/70">Adjust speed in controls</p>
                      </div>
                    )}
                    {componentData.slug === 'progress' && (
@@ -307,7 +316,6 @@ export const ComponentDetail: React.FC = () => {
                          variant={demoProps.variant || 'default'}
                          showLabel={demoProps.showLabel !== false}
                        />
-                       <p className="text-sm text-white/70 text-center">Adjust value and variant in controls</p>
                      </div>
                    )}
                    {componentData.slug === 'property-showcase-card' && (
@@ -336,9 +344,9 @@ export const ComponentDetail: React.FC = () => {
                      <div className="w-full">
                        <Component 
                          tabs={[
-                           { id: '1', label: 'Overview', content: <div className="p-4 text-white">Overview content goes here. This tab shows general information.</div> },
-                           { id: '2', label: 'Details', content: <div className="p-4 text-white">Details content goes here. This tab shows detailed information.</div> },
-                           { id: '3', label: 'Settings', content: <div className="p-4 text-white">Settings content goes here. This tab shows configuration options.</div> },
+                           { id: '1', label: 'Overview', content: <div className="p-4 text-foreground">Overview content goes here. This tab shows general information.</div> },
+                           { id: '2', label: 'Details', content: <div className="p-4 text-foreground">Details content goes here. This tab shows detailed information.</div> },
+                           { id: '3', label: 'Settings', content: <div className="p-4 text-foreground">Settings content goes here. This tab shows configuration options.</div> },
                          ]}
                          defaultTab="1"
                        />
@@ -354,13 +362,12 @@ export const ComponentDetail: React.FC = () => {
                          ]}
                          allowMultiple={demoProps.allowMultiple}
                        />
-                       <p className="text-sm text-white/70 text-center">Click sections to expand/collapse</p>
                      </div>
                    )}
                    {componentData.slug === 'modal' && (
                      <div className="text-center">
-                       <p className="text-white/70 mb-4">Modal component requires state management.</p>
-                       <p className="text-sm text-white/70">Check the code tab for usage examples.</p>
+                       <p className="text-muted-foreground mb-4">Modal component requires state management.</p>
+                       <p className="text-sm text-muted-foreground">Check the code tab for usage examples.</p>
                      </div>
                    )}
                    {componentData.slug === 'tooltip' && (
@@ -370,9 +377,10 @@ export const ComponentDetail: React.FC = () => {
                            Hover me
                          </button>
                        </Component>
-                       <p className="text-sm text-white/70">Hover over the button to see the tooltip</p>
+                       <p className="text-sm text-muted-foreground">Hover over the button to see the tooltip</p>
                      </div>
                    )}
+                   {/* TEMPLATES */}
                    {componentData.slug === 'gandom-dashboard' && (
                      <div className="w-full h-[800px] bg-[#0F121C] rounded-xl overflow-hidden border border-gray-800">
                         <Component />
@@ -406,7 +414,6 @@ export const ComponentDetail: React.FC = () => {
                    {componentData.slug === 'nebula-swirl' && (
                      <div className="w-full h-[500px] bg-[#050505] rounded-xl relative overflow-hidden flex items-center justify-center">
                         <Component />
-                        <div className="z-10 text-white font-bold text-2xl relative pointer-events-none">Nebula Swirl Background</div>
                      </div>
                    )}
                    {componentData.slug === 'chain-fund' && (
@@ -457,7 +464,6 @@ export const ComponentDetail: React.FC = () => {
                           animateOn={demoProps.animateOn || 'hover'}
                           className="text-4xl font-bold text-green-500"
                         />
-                        <p className="text-sm text-white/70">Hover or refresh to see animation</p>
                      </div>
                    )}
                    {componentData.slug === 'gradient-text' && (
@@ -506,12 +512,14 @@ export const ComponentDetail: React.FC = () => {
                         </Component>
                      </div>
                    )}
+                   {/* FALLBACK */}
                    {!['split-text', 'spotlight-card', 'tilted-card', 'button', 'input', 'badge', 'card', 'glowing-card', 'shimmer-button', 'parallax-card', 'typewriter-text', 'progress', 'property-showcase-card', 'animated-gradient', 'tabs', 'accordion', 'modal', 'tooltip', 'modern-saas', 'modern-creative-dashboard', 'gandom-dashboard', 'saaspo-landing', 'decrypted-text', 'gradient-text', 'glass-card', 'dock', 'star-border', 'artoo-3d', 'nebula-portfolio', 'nebula-swirl', 'chain-fund', 'nixt-node', 'payon-hero', 'unlimi-hero', 'nebula-hero', 'roobert-hero', 'spotify-dashboard', 'decks-intro'].includes(componentData.slug) && (
                      <div className="text-center text-muted-foreground">
                        <p className="mb-4">Preview not available for this component.</p>
                        <p className="text-sm">Check the code tab for usage examples.</p>
                      </div>
                    )}
+                   {/* END COPIED LOGIC */}
                  </div>
              </div>
 
@@ -592,7 +600,7 @@ export const ComponentDetail: React.FC = () => {
              )}
           </div>
         ) : (
-          <div className="relative group h-full">
+          <div className="relative group h-full bg-[#0d0d0d]">
             <button 
               onClick={handleCopy}
               className="absolute right-4 top-4 z-10 flex items-center gap-2 px-3 py-2 rounded-md bg-white/10 border border-white/10 text-xs font-medium text-white hover:bg-white/20 transition-all backdrop-blur-sm"
@@ -615,7 +623,7 @@ export const ComponentDetail: React.FC = () => {
               borderRadius: '0 0 0.75rem 0.75rem', 
               padding: '1.5rem', 
               fontSize: '0.875rem', 
-              backgroundColor: '#0d0d0d', 
+              backgroundColor: 'transparent',
               color: '#f8f8f2' 
             }}>
               {componentData.code}
@@ -623,39 +631,6 @@ export const ComponentDetail: React.FC = () => {
           </div>
         )}
       </div>
-
-      {/* Default Configuration Section - Display only if meaningful and not redundant with controls */}
-      {defaultProps.length > 0 && activeTab === 'code' && (
-        <div className="mt-12">
-          <div className="flex items-center gap-2 mb-6">
-            <Info size={20} className="text-primary" />
-            <h3 className="text-xl font-bold text-white">Default Configuration</h3>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {defaultProps.map(prop => (
-               <div key={prop.name} className="relative group p-4 rounded-xl bg-surface border border-border hover:border-primary/50 transition-colors">
-                  <div className="flex items-center justify-between mb-3">
-                     <code className="text-sm font-bold text-primary bg-primary/10 px-2 py-0.5 rounded">{prop.name}</code>
-                     <span className="text-[10px] uppercase tracking-wider text-secondary font-medium">{prop.type}</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-black/40 border border-white/5">
-                    {prop.default && isColor(prop.default) && (
-                      <div 
-                        className="h-6 w-6 rounded-md border border-white/10 shadow-sm shrink-0" 
-                        style={{ background: prop.default }}
-                      />
-                    )}
-                    <code className="text-sm text-gray-300 font-mono break-all">
-                      {prop.default}
-                    </code>
-                  </div>
-               </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       <div className="mt-12">
         <h3 className="text-2xl font-semibold tracking-tight text-foreground mb-6">Props</h3>
