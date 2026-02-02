@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Github, Twitter, Menu, X, Search, Command, ChevronRight, FileText, Box } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import { Modal } from '../lib/Modal';
+import { ThemeToggle } from '../lib/ThemeToggle';
 import { COMPONENT_REGISTRY } from '../../data/registry';
 
 interface HeaderProps {
@@ -139,11 +140,13 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick, isMenuOpen }) => {
                className="flex items-center gap-3 rounded-md bg-muted/50 border border-input px-4 py-2 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors group"
              >
                <Search size={14} />
-               <span className="hidden sm:inline">Search components...</span>
+               <span className="hidden sm:inline">Search...</span>
                <kbd className="hidden sm:inline-flex h-5 items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 ml-1">
                  <span className="text-xs">⌘</span>K
                </kbd>
              </button>
+
+             <ThemeToggle />
 
              <a 
               href="https://github.com/Nandan-D14/Premium-UI"
