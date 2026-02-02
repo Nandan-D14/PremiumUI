@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { COMPONENT_REGISTRY } from '../data/registry';
-import { Check, Copy, Code, Eye, Info, Settings2, RotateCcw, ArrowRight } from 'lucide-react';
+import { Check, Copy, Code, Eye, Info, Settings2, RotateCcw, ArrowRight, Sparkles } from 'lucide-react';
 import { cn } from '../utils/cn';
 import { useToast } from '../context/ToastContext';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -10,7 +10,7 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 export const ComponentDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const componentData = COMPONENT_REGISTRY.find(c => c.slug === slug);
-  const [activeTab, setActiveTab] = useState<'preview' | 'code'>('preview');
+  const [activeTab, setActiveTab] = useState<'preview' | 'code' | 'prompt'>('preview');
   const [copied, setCopied] = useState(false);
   const { addToast } = useToast();
 
@@ -91,10 +91,10 @@ export const ComponentDetail: React.FC = () => {
   const Component = componentData.component;
   const defaultProps = componentData.props.filter(p => p.default);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(componentData.code);
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text);
     setCopied(true);
-    addToast('Code copied to clipboard!', 'success');
+    addToast('Copied to clipboard!', 'success');
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -156,6 +156,20 @@ export const ComponentDetail: React.FC = () => {
           >
             <Code size={16} /> Code
           </button>
+
+          {componentData.prompt && (
+             <button
+              onClick={() => setActiveTab('prompt')}
+              className={cn(
+                "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all",
+                activeTab === 'prompt'
+                  ? "bg-background text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+              )}
+            >
+              <Sparkles size={16} /> AI Prompt
+            </button>
+          )}
         </div>
 
         {componentData.category === 'Templates' && (
@@ -629,7 +643,39 @@ export const ComponentDetail: React.FC = () => {
               {componentData.code}
             </SyntaxHighlighter>
           </div>
-        )}
+        ) : activeTab === 'prompt' ? (
+          <div className="relative group h-full bg-[#0d0d0d] p-8">
+             <button
+              onClick={() => handleCopy(componentData.prompt || '')}
+              className="absolute right-4 top-4 z-10 flex items-center gap-2 px-3 py-2 rounded-md bg-white/10 border border-white/10 text-xs font-medium text-white hover:bg-white/20 transition-all backdrop-blur-sm"
+            >
+              {copied ? (
+                <>
+                  <Check size={14} className="text-green-400" />
+                  <span className="text-green-400">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy size={14} />
+                  <span>Copy Prompt</span>
+                </>
+              )}
+            </button>
+
+            <div className="prose prose-invert max-w-none">
+               <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                  <Sparkles className="text-primary" size={20} />
+                  Cursor / v0 Prompt
+               </h3>
+               <p className="text-gray-400 mb-6">
+                  Paste this prompt into your favorite AI coding tool to generate or iterate on this component.
+               </p>
+               <div className="bg-[#1a1a1a] p-6 rounded-lg border border-white/10 font-mono text-sm text-gray-300 leading-relaxed whitespace-pre-wrap">
+                  {componentData.prompt}
+               </div>
+            </div>
+          </div>
+        ) : null}
       </div>
 
       <div className="mt-12">

@@ -7,7 +7,7 @@ import { Hero } from '../components/landing/Hero';
 import { BentoGrid } from '../components/landing/BentoGrid';
 import { Testimonials } from '../components/landing/Testimonials';
 import { FAQ } from '../components/landing/FAQ';
-import { ArrowRight, Copy, Settings, Zap } from 'lucide-react';
+import { ArrowRight, Copy, Settings, Zap, Sparkles } from 'lucide-react';
 
 export const Home: React.FC = () => {
   return (
@@ -23,10 +23,10 @@ export const Home: React.FC = () => {
         <div className="py-32 relative max-w-7xl mx-auto">
            <div className="text-center mb-20">
              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">
-               From idea to production <span className="text-primary">in seconds</span>
+               Built for the <span className="text-primary">AI Era</span>
              </h2>
              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-               Stop wrestling with complex setups. Our workflow is designed for speed and simplicity.
+               Stop wrestling with complex setups. Whether you copy the code or the prompt, our workflow is designed for speed.
              </p>
            </div>
            
@@ -40,15 +40,15 @@ export const Home: React.FC = () => {
                  border: 'group-hover:border-blue-500/50'
                },
                { 
-                 title: 'Copy', 
-                 desc: 'One click to copy the code. No npm install required.',
-                 icon: <Copy className="w-8 h-8 text-primary" />,
+                 title: 'Prompt',
+                 desc: 'Copy the optimized AI prompt to iterate with Cursor, v0, or Bolt.',
+                 icon: <Sparkles className="w-8 h-8 text-primary" />,
                  gradient: 'from-violet-500/10 to-fuchsia-500/10',
                  border: 'group-hover:border-violet-500/50'
                },
                { 
                  title: 'Ship', 
-                 desc: 'Paste into your project and deploy. It just works.',
+                 desc: 'Paste the code into your project and deploy. It just works.',
                  icon: <Zap className="w-8 h-8 text-primary" />,
                  gradient: 'from-emerald-500/10 to-lime-500/10',
                  border: 'group-hover:border-emerald-500/50'
