@@ -345,6 +345,7 @@ export function Example() {
       { name: 'delay', type: 'number', default: '0.05', description: 'Delay between each word animation in seconds.' },
       { name: 'className', type: 'string', description: 'Additional CSS classes.' },
     ],
+    prompt: `Create a React component called \`SplitText\` that animates text character by character or word by word. It should accept \`text\`, \`delay\`, and \`className\` as props. Use \`framer-motion\` for animations. The component should split the text string into individual characters (or words) and render them inside a span. Each character should have an initial opacity of 0 and a y-offset, then animate to opacity 1 and y:0 using a spring transition. The animation for each character should be staggered by the \`delay\` prop. Ensure the component handles spaces correctly so they are preserved in the layout. The component should be fully accessible.`,
     code: `import { SplitText } from './SplitText';
 
 export function Example() {
@@ -421,6 +422,7 @@ export function Example() {
       { name: 'className', type: 'string', description: 'Additional CSS classes.' },
       { name: 'onClick', type: '() => void', description: 'Click handler.' },
     ],
+    prompt: `Create a versatile Button component using Tailwind CSS and Framer Motion. It should support variants (default, outline, ghost, etc.), sizes (sm, md, lg), and a loading state.`,
     code: `// Installation: Copy the Button component to your project
 // Dependencies: framer-motion, lucide-react, tailwind-merge
 
@@ -601,6 +603,7 @@ export function Example() {
       { name: 'hover', type: 'boolean', default: 'false', description: 'Enable hover animation.' },
       { name: 'className', type: 'string', description: 'Additional CSS classes.' },
     ],
+    prompt: `Create a simple Card component with header, content, and footer sections. It should have a clean design with a subtle border and shadow.`,
     code: `import { Card, CardHeader, CardTitle, CardDescription, CardContent } from './Card';
 
 export function Example() {

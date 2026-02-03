@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { COMPONENT_REGISTRY } from '../data/registry';
-import { Check, Copy, Code, Eye, Info, Settings2, RotateCcw, ArrowRight } from 'lucide-react';
+import { Check, Copy, Code, Eye, Info, Settings2, RotateCcw, ArrowRight, Sparkles } from 'lucide-react';
 import { cn } from '../utils/cn';
 import { useToast } from '../context/ToastContext';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -10,7 +10,7 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 export const ComponentDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const componentData = COMPONENT_REGISTRY.find(c => c.slug === slug);
-  const [activeTab, setActiveTab] = useState<'preview' | 'code'>('preview');
+  const [activeTab, setActiveTab] = useState<'preview' | 'code' | 'prompt'>('preview');
   const [copied, setCopied] = useState(false);
   const { addToast } = useToast();
 
@@ -155,6 +155,17 @@ export const ComponentDetail: React.FC = () => {
             )}
           >
             <Code size={16} /> Code
+          </button>
+          <button
+            onClick={() => setActiveTab('prompt')}
+            className={cn(
+              "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all",
+              activeTab === 'prompt'
+                ? "bg-background text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+            )}
+          >
+            <Sparkles size={16} /> Prompt
           </button>
         </div>
 
@@ -599,7 +610,7 @@ export const ComponentDetail: React.FC = () => {
              </div>
              )}
           </div>
-        ) : (
+        ) : activeTab === 'code' ? (
           <div className="relative group h-full bg-[#0d0d0d]">
             <button 
               onClick={handleCopy}
@@ -628,6 +639,35 @@ export const ComponentDetail: React.FC = () => {
             }}>
               {componentData.code}
             </SyntaxHighlighter>
+          </div>
+        ) : (
+          <div className="relative group h-full bg-[#0d0d0d]">
+            <button
+              onClick={() => {
+                if (componentData.prompt) {
+                  navigator.clipboard.writeText(componentData.prompt);
+                  setCopied(true);
+                  addToast('Prompt copied to clipboard!', 'success');
+                  setTimeout(() => setCopied(false), 2000);
+                }
+              }}
+              className="absolute right-4 top-4 z-10 flex items-center gap-2 px-3 py-2 rounded-md bg-white/10 border border-white/10 text-xs font-medium text-white hover:bg-white/20 transition-all backdrop-blur-sm"
+            >
+              {copied ? (
+                <>
+                  <Check size={14} className="text-green-400" />
+                  <span className="text-green-400">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy size={14} />
+                  <span>Copy Prompt</span>
+                </>
+              )}
+            </button>
+            <div className="p-6 h-full min-h-[500px] text-white/90 font-mono text-sm leading-relaxed whitespace-pre-wrap">
+              {componentData.prompt || "No prompt available for this component."}
+            </div>
           </div>
         )}
       </div>

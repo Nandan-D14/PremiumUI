@@ -187,6 +187,10 @@ export function cn(...inputs: ClassValue[]) {
                   <Check size={16} className="text-primary" />
                   <span>Micro-interactions and fluid animations</span>
                 </li>
+                <li className="flex items-center gap-3">
+                  <Check size={16} className="text-primary" />
+                  <span>AI-Ready: Includes detailed prompts for generation</span>
+                </li>
               </ul>
             </div>
 
