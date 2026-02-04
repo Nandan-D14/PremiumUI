@@ -16,6 +16,7 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
   scaleOnHover = 1.05
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const rectRef = useRef<DOMRect | null>(null);
   
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -26,10 +27,19 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [rotateAmplitude, -rotateAmplitude]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-rotateAmplitude, rotateAmplitude]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
+  const updateRect = () => {
+    if (ref.current) {
+      rectRef.current = ref.current.getBoundingClientRect();
+    }
+  };
 
-    const rect = ref.current.getBoundingClientRect();
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!rectRef.current) {
+      updateRect();
+    }
+    if (!rectRef.current) return;
+
+    const rect = rectRef.current;
     
     const width = rect.width;
     const height = rect.height;
@@ -52,6 +62,7 @@ export const TiltedCard: React.FC<TiltedCardProps> = ({
   return (
     <motion.div
       ref={ref}
+      onMouseEnter={updateRect}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
