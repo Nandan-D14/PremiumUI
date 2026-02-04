@@ -32,7 +32,19 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
       }
     };
     
-    window.addEventListener('resize', resizeCanvas);
+    // Use ResizeObserver with debounce for performance
+    const debouncedResize = debounce(resizeCanvas, 200);
+
+    const resizeObserver = new ResizeObserver(() => {
+      debouncedResize();
+    });
+
+    if (canvas.parentElement) {
+      resizeObserver.observe(canvas.parentElement);
+    } else {
+      window.addEventListener('resize', debouncedResize);
+    }
+
     resizeCanvas();
 
     // Animation Loop
@@ -108,7 +120,8 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
     render();
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', debouncedResize);
       window.cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -121,3 +134,20 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
     />
   );
 };
+
+// Simple debounce utility
+function debounce<T extends (...args: any[]) => void>(
+  func: T,
+  wait: number
+): (...args: Parameters<T>) => void {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+
+  return function (...args: Parameters<T>) {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(() => {
+      func(...args);
+    }, wait);
+  };
+}
