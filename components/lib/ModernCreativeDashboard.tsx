@@ -21,70 +21,7 @@ import {
   Layers,
   Zap,
 } from 'lucide-react';
-
-// --- Styles for Animations & Custom Backgrounds ---
-const styles = `
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  @keyframes growBar {
-    from { height: 0; }
-    to { height: var(--target-height); }
-  }
-
-  @keyframes progressFill {
-    from { stroke-dashoffset: 283; }
-    to { stroke-dashoffset: var(--target-offset); }
-  }
-
-  @keyframes pulse-green {
-    0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
-  }
-
-  .animate-slide-in {
-    animation: slideIn 0.6s ease-out forwards;
-    opacity: 0;
-  }
-
-  .animate-bar {
-    animation: growBar 1s ease-out forwards 0.3s;
-  }
-  
-  .animate-progress {
-    animation: progressFill 1.5s ease-out forwards 0.5s;
-  }
-
-  .glass-card {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-  }
-
-  .striped-bar {
-    background-image: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 4px,
-      #e5e7eb 4px,
-      #e5e7eb 8px
-    );
-  }
-
-  /* Custom Scrollbar for the project list if needed */
-  .custom-scroll::-webkit-scrollbar {
-    width: 4px;
-  }
-  .custom-scroll::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  .custom-scroll::-webkit-scrollbar-thumb {
-    background: #ddd;
-    border-radius: 4px;
-  }
-`;
+import './ModernCreativeDashboard.css';
 
 const SidebarItem = ({ icon: Icon, label, active, badge }: any) => (
   <div className={`flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all duration-300 group ${active ? 'bg-white shadow-sm text-green-800' : 'text-gray-400 hover:bg-gray-50 hover:text-gray-600'}`}>
@@ -174,7 +111,6 @@ export const ModernCreativeDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#F3F4F6] p-4 lg:p-6 font-sans text-slate-800 flex overflow-hidden">
-      <style>{styles}</style>
       
       {/* Sidebar */}
       <aside className="w-64 hidden lg:flex flex-col justify-between pr-6 py-2 sticky top-0 h-[95vh]">
