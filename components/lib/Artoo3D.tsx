@@ -130,6 +130,8 @@ export const ArtooHeroContent = () => (
         }}
         whileHover={{ scale: 1.05, rotate: 2 }}
         src="https://img.freepik.com/premium-photo/cute-elephant-3d-rendering_950002-23940.jpg?w=826" 
+        width={826}
+        height={472}
         alt="3D Elephant" 
         className="relative z-10 w-auto h-full max-h-[400px] object-contain drop-shadow-2xl mix-blend-normal rounded-xl"
       />
