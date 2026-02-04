@@ -18,7 +18,7 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
     let time = 0;
 
     // Configuration for the swirl
-    const particles: { x: number, y: number, age: number }[] = [];
+    const particles: { x: number, y: number }[] = [];
     const particleCount = 60; // Number of points in the tail
     
     // Resize handler
@@ -66,7 +66,7 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
       const y = centerY + Math.sin(time * 1.2) * radiusY + Math.cos(time * 3.1) * 50;
 
       // Add new point to head
-      particles.push({ x, y, age: 0 });
+      particles.push({ x, y });
 
       // Remove old points
       if (particles.length > particleCount) {
