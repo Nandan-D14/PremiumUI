@@ -18,7 +18,7 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
     let time = 0;
 
     // Configuration for the swirl
-    const particles: { x: number, y: number, age: number }[] = [];
+    const particles: { x: number, y: number }[] = [];
     const particleCount = 60; // Number of points in the tail
     
     // Resize handler
@@ -32,7 +32,19 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
       }
     };
     
-    window.addEventListener('resize', resizeCanvas);
+    // Use ResizeObserver with debounce for performance
+    const debouncedResize = debounce(resizeCanvas, 200);
+
+    const resizeObserver = new ResizeObserver(() => {
+      debouncedResize();
+    });
+
+    if (canvas.parentElement) {
+      resizeObserver.observe(canvas.parentElement);
+    } else {
+      window.addEventListener('resize', debouncedResize);
+    }
+
     resizeCanvas();
 
     // Animation Loop
@@ -54,7 +66,7 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
       const y = centerY + Math.sin(time * 1.2) * radiusY + Math.cos(time * 3.1) * 50;
 
       // Add new point to head
-      particles.push({ x, y, age: 0 });
+      particles.push({ x, y });
 
       // Remove old points
       if (particles.length > particleCount) {
@@ -108,7 +120,8 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
     render();
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', debouncedResize);
       window.cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -121,3 +134,20 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
     />
   );
 };
+
+// Simple debounce utility
+function debounce<T extends (...args: any[]) => void>(
+  func: T,
+  wait: number
+): (...args: Parameters<T>) => void {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+
+  return function (...args: Parameters<T>) {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(() => {
+      func(...args);
+    }, wait);
+  };
+}
