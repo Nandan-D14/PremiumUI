@@ -2,7 +2,7 @@
   "name": "react-ui-component-library",
   "private": true,
   "version": "2.0.0",
-  "description": "A premium collection of 16+ animated React components built with Tailwind CSS and Framer Motion",
+  "description": "A premium collection of 44+ animated React components built with Tailwind CSS and Framer Motion",
   "type": "module",
   "scripts": {
     "dev": "vite",

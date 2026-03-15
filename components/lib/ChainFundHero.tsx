@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, RefreshCw, Users, Leaf, Menu } from 'lucide-react';
 
@@ -221,24 +221,32 @@ export const ChainFundHero = () => {
              />
 
              {/* Additional particles/sparkles in the light beam */}
-             {[...Array(5)].map((_, i) => (
+             {useMemo(() => [...Array(5)].map((_, i) => ({
+                id: i,
+                width: Math.random() * 4 + 2 + 'px',
+                height: Math.random() * 4 + 2 + 'px',
+                top: Math.random() * 80 + '%',
+                right: Math.random() * 40 + 10 + '%',
+                duration: Math.random() * 3 + 2,
+                delay: Math.random() * 2
+             })), []).map((particle) => (
                 <motion.div
-                  key={i}
+                  key={particle.id}
                   className="absolute bg-blue-400 rounded-full blur-[1px]"
                   style={{
-                    width: Math.random() * 4 + 2 + 'px',
-                    height: Math.random() * 4 + 2 + 'px',
-                    top: Math.random() * 80 + '%',
-                    right: Math.random() * 40 + 10 + '%',
+                    width: particle.width,
+                    height: particle.height,
+                    top: particle.top,
+                    right: particle.right,
                   }}
                   animate={{ 
                     y: [0, -100, 0], 
                     opacity: [0, 1, 0] 
                   }}
                   transition={{ 
-                    duration: Math.random() * 3 + 2, 
+                    duration: particle.duration,
                     repeat: Infinity,
-                    delay: Math.random() * 2
+                    delay: particle.delay
                   }}
                 />
              ))}

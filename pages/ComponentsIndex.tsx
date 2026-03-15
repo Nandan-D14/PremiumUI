@@ -5,6 +5,14 @@ import { ArrowRight, Search, ChevronDown, Folder, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../utils/cn';
 
+// Pre-compute lowercase versions of search-relevant fields to optimize filtering
+const ENHANCED_COMPONENT_REGISTRY = COMPONENT_REGISTRY.map(component => ({
+  ...component,
+  _lowerName: component.name.toLowerCase(),
+  _lowerDescription: component.description.toLowerCase(),
+  _lowerCategory: component.category.toLowerCase(),
+}));
+
 export const ComponentsIndex: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   // Track collapsed categories. Empty array means all are expanded by default.
@@ -12,19 +20,29 @@ export const ComponentsIndex: React.FC = () => {
 
   const filteredComponents = useMemo(() => {
     const lowerQuery = searchQuery.toLowerCase().trim();
-    if (!lowerQuery) return COMPONENT_REGISTRY;
+    if (!lowerQuery) return ENHANCED_COMPONENT_REGISTRY;
     
-    return COMPONENT_REGISTRY.filter(component =>
-      component.name.toLowerCase().includes(lowerQuery) ||
-      component.description.toLowerCase().includes(lowerQuery) ||
-      component.category.toLowerCase().includes(lowerQuery)
+    return ENHANCED_COMPONENT_REGISTRY.filter(component =>
+      component._lowerName.includes(lowerQuery) ||
+      component._lowerDescription.includes(lowerQuery) ||
+      component._lowerCategory.includes(lowerQuery)
     );
   }, [searchQuery]);
 
   // Get all unique categories from the registry to maintain order
   const allCategories = useMemo(() => {
-    return Array.from(new Set(COMPONENT_REGISTRY.map(c => c.category)));
+    return Array.from(new Set(ENHANCED_COMPONENT_REGISTRY.map(c => c.category)));
   }, []);
+
+  const groupedComponents = useMemo(() => {
+    return filteredComponents.reduce((acc, component) => {
+      if (!acc[component.category]) {
+        acc[component.category] = [];
+      }
+      acc[component.category].push(component);
+      return acc;
+    }, {} as Record<string, typeof filteredComponents>);
+  }, [filteredComponents]);
 
   const toggleCategory = (category: string) => {
     setCollapsedCategories(prev => 
@@ -76,7 +94,7 @@ export const ComponentsIndex: React.FC = () => {
       {filteredComponents.length > 0 ? (
         <div className="space-y-8">
           {allCategories.map(category => {
-            const categoryComponents = filteredComponents.filter(c => c.category === category);
+            const categoryComponents = groupedComponents[category] || [];
             
             // If no components match in this category, don't render the section
             if (categoryComponents.length === 0) return null;

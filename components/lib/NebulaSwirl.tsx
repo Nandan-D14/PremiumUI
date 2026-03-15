@@ -18,7 +18,7 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
     let time = 0;
 
     // Configuration for the swirl
-    const particles: { x: number, y: number, age: number }[] = [];
+    const particles: { x: number, y: number }[] = [];
     const particleCount = 60; // Number of points in the tail
     
     // Resize handler
@@ -32,7 +32,19 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
       }
     };
     
-    window.addEventListener('resize', resizeCanvas);
+    // Use ResizeObserver with debounce for performance
+    const debouncedResize = debounce(resizeCanvas, 200);
+
+    const resizeObserver = new ResizeObserver(() => {
+      debouncedResize();
+    });
+
+    if (canvas.parentElement) {
+      resizeObserver.observe(canvas.parentElement);
+    } else {
+      window.addEventListener('resize', debouncedResize);
+    }
+
     resizeCanvas();
 
     // Animation Loop
@@ -54,7 +66,7 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
       const y = centerY + Math.sin(time * 1.2) * radiusY + Math.cos(time * 3.1) * 50;
 
       // Add new point to head
-      particles.push({ x, y, age: 0 });
+      particles.push({ x, y });
 
       // Remove old points
       if (particles.length > particleCount) {
@@ -62,16 +74,11 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
       }
 
       // Draw the glowing path
-      ctx.beginPath();
-      // Glow settings
-      ctx.shadowBlur = 40;
-      ctx.shadowColor = 'rgba(200, 255, 255, 0.5)';
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-      ctx.lineWidth = 4;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-
       if (particles.length > 1) {
+        ctx.beginPath();
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
         ctx.moveTo(particles[0].x, particles[0].y);
         // Draw quadratic bezier curve for smoothness
         for (let i = 1; i < particles.length - 1; i++) {
@@ -79,6 +86,16 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
           const yc = (particles[i].y + particles[i + 1].y) / 2;
           ctx.quadraticCurveTo(particles[i].x, particles[i].y, xc, yc);
         }
+
+        // Draw outer glow (simulated with wide semi-transparent stroke)
+        // This replaces costly shadowBlur
+        ctx.strokeStyle = 'rgba(200, 255, 255, 0.2)';
+        ctx.lineWidth = 30;
+        ctx.stroke();
+
+        // Draw inner core
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+        ctx.lineWidth = 4;
         ctx.stroke();
       }
       
@@ -91,8 +108,7 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
         gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
         
         ctx.fillStyle = gradient;
-        ctx.shadowBlur = 60;
-        ctx.shadowColor = 'cyan';
+        // Removed costly shadowBlur, relying on radial gradient and CSS blur
         ctx.beginPath();
         ctx.arc(head.x, head.y, 20, 0, Math.PI * 2);
         ctx.fill();
@@ -104,7 +120,8 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
     render();
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', debouncedResize);
       window.cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -117,3 +134,20 @@ export const NebulaSwirl = ({ className }: { className?: string }) => {
     />
   );
 };
+
+// Simple debounce utility
+function debounce<T extends (...args: any[]) => void>(
+  func: T,
+  wait: number
+): (...args: Parameters<T>) => void {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+
+  return function (...args: Parameters<T>) {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(() => {
+      func(...args);
+    }, wait);
+  };
+}
