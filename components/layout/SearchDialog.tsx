@@ -22,13 +22,16 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ isOpen, onClose }) =
       title: c.name,
       description: c.description,
       path: `/components/${c.slug}`,
-      category: c.category
+      category: c.category,
+      _searchTitle: c.name.toLowerCase(),
+      _searchDesc: c.description.toLowerCase(),
+      _searchCat: c.category.toLowerCase()
     }));
 
     const docs = [
-      { type: 'doc', title: 'Introduction', description: 'Getting started with Premium UI', path: '/docs/introduction', category: 'Documentation' },
-      { type: 'doc', title: 'Installation', description: 'How to install and use', path: '/docs/installation', category: 'Documentation' },
-      { type: 'template', title: 'SaaS Landing', description: 'Complete SaaS landing page template', path: '/components/modern-saas', category: 'Templates' },
+      { type: 'doc', title: 'Introduction', description: 'Getting started with Premium UI', path: '/docs/introduction', category: 'Documentation', _searchTitle: 'introduction', _searchDesc: 'getting started with premium ui', _searchCat: 'documentation' },
+      { type: 'doc', title: 'Installation', description: 'How to install and use', path: '/docs/installation', category: 'Documentation', _searchTitle: 'installation', _searchDesc: 'how to install and use', _searchCat: 'documentation' },
+      { type: 'template', title: 'SaaS Landing', description: 'Complete SaaS landing page template', path: '/components/modern-saas', category: 'Templates', _searchTitle: 'saas landing', _searchDesc: 'complete saas landing page template', _searchCat: 'templates' },
     ];
 
     return [...docs, ...components];
@@ -39,9 +42,9 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ isOpen, onClose }) =
     if (!searchQuery.trim()) return [];
     const lowerQuery = searchQuery.toLowerCase();
     return searchItems.filter(item =>
-      item.title.toLowerCase().includes(lowerQuery) ||
-      item.description.toLowerCase().includes(lowerQuery) ||
-      item.category.toLowerCase().includes(lowerQuery)
+      item._searchTitle.includes(lowerQuery) ||
+      item._searchDesc.includes(lowerQuery) ||
+      item._searchCat.includes(lowerQuery)
     ).slice(0, 5); // Limit to 5 results
   }, [searchQuery, searchItems]);
 
